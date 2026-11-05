@@ -41,7 +41,6 @@
       flex-direction: column;
     }
 
-    /* 頂部導航列 */
     header {
       height: 52px;
       background: rgba(8, 14, 24, 0.98);
@@ -96,7 +95,6 @@
       cursor: pointer;
     }
 
-    /* 主舞台 */
     .game-container {
       flex: 1;
       display: flex;
@@ -104,7 +102,7 @@
       overflow: hidden;
     }
 
-    /* 左側探索場景 */
+    /* 遊戲主舞台地圖 */
     .viewport {
       flex: 1.4;
       position: relative;
@@ -134,73 +132,68 @@
     .interactive-canvas {
       flex: 1;
       position: relative;
-      background: radial-gradient(#142438 1px, transparent 1px);
-      background-size: 24px 24px;
+      background: #08111e;
+      background-image: 
+        linear-gradient(rgba(26, 44, 71, 0.4) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26, 44, 71, 0.4) 1px, transparent 1px);
+      background-size: 32px 32px;
       overflow: hidden;
     }
 
-    /* 玩家場景像素人物 */
-    .player-character-stage {
+    /* 玩家操控實體 */
+    .player-actor {
       position: absolute;
-      bottom: 25px;
-      left: 30px;
-      width: 105px;
-      height: 145px;
-      background: linear-gradient(180deg, #112d4d 0%, #0a1829 100%);
-      border: 2px solid var(--cyan-bright);
-      box-shadow: 0 0 20px var(--cyan-glow);
-      border-radius: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 15;
-      animation: playerIdle 2.5s ease-in-out infinite alternate;
+      width: 44px;
+      height: 44px;
+      transform: translate(-50%, -50%);
+      transition: left 0.12s ease-out, top 0.12s ease-out;
+      z-index: 30;
+      pointer-events: none;
     }
 
-    .player-stage-badge {
+    .player-nametag {
       position: absolute;
-      top: -11px;
-      background: var(--cyan-bright);
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 194, 255, 0.9);
       color: #000;
-      font-size: 9px;
-      font-weight: 900;
-      padding: 2px 7px;
-      border-radius: 4px;
-    }
-
-    .player-stage-avatar {
-      width: 58px;
-      height: 58px;
-      margin-top: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .player-stage-name {
-      margin-top: 4px;
+      font-size: 10px;
       font-weight: bold;
-      font-size: 11px;
-      color: #ffffff;
-      max-width: 90px;
+      padding: 1px 6px;
+      border-radius: 3px;
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      box-shadow: 0 0 8px rgba(0, 194, 255, 0.8);
     }
 
-    @keyframes playerIdle {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-5px); }
-    }
-
-    /* 發光探索物件 */
-    .hotspot {
+    .action-bubble {
       position: absolute;
-      width: 82px;
-      height: 82px;
-      background: rgba(14, 27, 46, 0.9);
+      top: -38px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-gold);
+      color: #000;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      box-shadow: 0 0 12px rgba(255, 209, 102, 0.9);
+      display: none;
+      animation: bounce 0.8s infinite alternate;
+    }
+
+    @keyframes bounce {
+      from { transform: translateX(-50%) translateY(0); }
+      to { transform: translateX(-50%) translateY(-4px); }
+    }
+
+    /* 場景互動地圖實體 */
+    .map-object {
+      position: absolute;
+      transform: translate(-50%, -50%);
       border: 2px solid var(--cyan-bright);
+      background: rgba(13, 27, 46, 0.9);
       border-radius: 8px;
       display: flex;
       flex-direction: column;
@@ -208,114 +201,99 @@
       justify-content: center;
       cursor: pointer;
       box-shadow: 0 0 15px var(--cyan-glow);
-      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      animation: floatItem 3s ease-in-out infinite alternate;
+      transition: all 0.2s;
+      z-index: 20;
     }
 
-    .hotspot:hover, .hotspot:active {
-      transform: scale(1.08);
-      background: rgba(0, 194, 255, 0.25);
+    .map-object:hover {
       box-shadow: 0 0 25px var(--cyan-bright);
+      transform: translate(-50%, -50%) scale(1.05);
     }
 
-    .hotspot.collected {
+    .map-object.collected {
       border-color: var(--accent-green);
       box-shadow: 0 0 10px rgba(0, 229, 153, 0.4);
-      opacity: 0.8;
     }
 
-    .hotspot .icon {
-      font-size: 28px;
-      margin-bottom: 2px;
+    .map-object .obj-icon {
+      font-size: 26px;
     }
 
-    .hotspot .label {
-      font-size: 11px;
-      font-weight: bold;
+    .map-object .obj-label {
+      font-size: 10px;
       color: var(--text-main);
-      text-align: center;
+      font-weight: bold;
+      margin-top: 2px;
     }
 
-    @keyframes floatItem {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-8px); }
-    }
-
-    /* 可愛像素 NPC 立繪卡片 */
-    .npc-character {
+    /* NPC 實體 */
+    .map-npc {
       position: absolute;
-      bottom: 25px;
-      right: 25px;
-      width: 115px;
-      height: 155px;
-      background: linear-gradient(180deg, #183354 0%, #0d1e33 100%);
-      border: 2px solid var(--accent-gold);
-      box-shadow: 0 0 25px rgba(255, 209, 102, 0.35);
-      border-radius: 10px;
+      transform: translate(-50%, -50%);
+      width: 54px;
+      height: 64px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: transform 0.2s;
-      z-index: 20;
-      animation: floatNpc 2.8s ease-in-out infinite alternate;
+      z-index: 22;
     }
 
-    .npc-character:hover, .npc-character:active {
-      transform: scale(1.06);
-    }
-
-    .npc-badge {
-      position: absolute;
-      top: -12px;
-      background: var(--accent-gold);
-      color: #000;
-      font-size: 10px;
-      font-weight: 900;
-      padding: 3px 8px;
-      border-radius: 4px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-    }
-
-    .npc-avatar-art {
-      width: 60px;
-      height: 60px;
-      background: #0a1320;
-      border: 2px solid var(--cyan-bright);
+    .map-npc-art {
+      width: 44px;
+      height: 44px;
+      border: 2px solid var(--accent-gold);
       border-radius: 50%;
+      background: #0d1e33;
+      padding: 3px;
+      box-shadow: 0 0 15px rgba(255, 209, 102, 0.5);
+    }
+
+    .map-npc-name {
+      font-size: 10px;
+      font-weight: bold;
+      color: var(--accent-gold);
+      margin-top: 2px;
+      background: rgba(0,0,0,0.7);
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    /* 手機虛擬十字鍵 (D-Pad) */
+    .virtual-dpad {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      width: 120px;
+      height: 120px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 4px;
+      z-index: 40;
+      opacity: 0.85;
+    }
+
+    .dpad-btn {
+      background: rgba(19, 43, 69, 0.85);
+      border: 2px solid var(--cyan-bright);
+      color: var(--cyan-bright);
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 6px;
-      box-shadow: inset 0 0 10px rgba(0, 194, 255, 0.5);
-    }
-
-    .npc-name {
-      margin-top: 6px;
+      font-size: 18px;
       font-weight: bold;
-      font-size: 12px;
-      color: #ffffff;
+      cursor: pointer;
     }
 
-    .npc-click-hint {
-      font-size: 9px;
-      color: var(--accent-gold);
-      margin-top: 2px;
-      animation: blink 1.2s infinite;
+    .dpad-btn:active {
+      background: var(--cyan-bright);
+      color: #000;
     }
 
-    @keyframes floatNpc {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-6px); }
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    /* 右側手冊與任務 */
+    /* 側邊資訊欄 */
     .sidebar {
       flex: 1;
       background: var(--panel-bg);
@@ -365,7 +343,6 @@
       background: #0d2621;
     }
 
-    /* 手冊道具網格 */
     .inventory-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -445,7 +422,7 @@
       color: var(--text-sub);
     }
 
-    /* RPG 冒險對話彈窗 */
+    /* RPG 冒險對話與特寫場景彈窗 */
     .modal-backdrop {
       position: fixed;
       top: 0;
@@ -490,6 +467,21 @@
 
     .rpg-body {
       padding: 18px;
+    }
+
+    /* 特寫場景展示卡片 */
+    .closeup-scene-card {
+      width: 100%;
+      height: 140px;
+      border: 2px solid var(--cyan-bright);
+      border-radius: 8px;
+      margin-bottom: 14px;
+      background: #0a1424;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
     }
 
     .dialogue-bubble {
@@ -596,12 +588,6 @@
       .sidebar.open {
         transform: translateY(0);
       }
-      .player-character-stage {
-        bottom: 15px;
-        left: 15px;
-        width: 90px;
-        height: 125px;
-      }
       .avatar-selection-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -637,7 +623,25 @@
       </div>
 
       <div class="interactive-canvas" id="interactiveCanvas">
-        <!-- 動態渲染場景物件、玩家人物與 NPC -->
+        <!-- 玩家實體 -->
+        <div class="player-actor" id="playerActor" style="left: 120px; top: 220px;">
+          <div class="action-bubble" id="actionBubble">調查 (E)</div>
+          <div class="player-nametag" id="playerActorName">玩家</div>
+          <div id="playerActorSvg" style="width:100%; height:100%;"></div>
+        </div>
+
+        <!-- 虛擬十字鍵 (手機與電腦皆可用) -->
+        <div class="virtual-dpad">
+          <div></div>
+          <div class="dpad-btn" onclick="movePlayer(0, -32)">▲</div>
+          <div></div>
+          <div class="dpad-btn" onclick="movePlayer(-32, 0)">◀</div>
+          <div class="dpad-btn" onclick="interactNearest()">OK</div>
+          <div class="dpad-btn" onclick="movePlayer(32, 0)">▶</div>
+          <div></div>
+          <div class="dpad-btn" onclick="movePlayer(0, 32)">▼</div>
+          <div></div>
+        </div>
       </div>
     </div>
 
@@ -662,7 +666,7 @@
     </div>
   </div>
 
-  <!-- 對話與線索彈窗 -->
+  <!-- 對話與特寫彈窗 -->
   <div class="modal-backdrop" id="modalBackdrop">
     <div class="rpg-dialogue-box" id="rpgBox">
       <div class="rpg-head" id="modalHead">標題</div>
@@ -674,9 +678,8 @@
   </div>
 
   <script>
-    // 內建純 SVG 像素向量圖繪製工廠
+    // 內建純 SVG 像素向量圖形庫
     const PIXEL_ART = {
-      // 角色 1：活力短髮・天藍上衣
       char1: `<svg viewBox="0 0 16 16" width="100%" height="100%" shape-rendering="crispEdges">
         <rect x="5" y="1" width="6" height="2" fill="#3A2312"/>
         <rect x="4" y="3" width="8" height="2" fill="#3A2312"/>
@@ -688,7 +691,6 @@
         <rect x="6" y="10" width="4" height="2" fill="#0077B6"/>
         <rect x="5" y="13" width="6" height="3" fill="#1B2A4A"/>
       </svg>`,
-      // 角色 2：溫柔長髮・珊瑚橘毛衣
       char2: `<svg viewBox="0 0 16 16" width="100%" height="100%" shape-rendering="crispEdges">
         <rect x="4" y="1" width="8" height="3" fill="#593122"/>
         <rect x="3" y="3" width="10" height="4" fill="#593122"/>
@@ -701,7 +703,6 @@
         <rect x="4" y="9" width="8" height="4" fill="#FF8C42"/>
         <rect x="5" y="13" width="6" height="3" fill="#2C3E50"/>
       </svg>`,
-      // 角色 3：俐落分邊・深藍夾克
       char3: `<svg viewBox="0 0 16 16" width="100%" height="100%" shape-rendering="crispEdges">
         <rect x="4" y="1" width="7" height="3" fill="#1A1A1A"/>
         <rect x="4" y="4" width="8" height="2" fill="#1A1A1A"/>
@@ -713,7 +714,6 @@
         <rect x="7" y="9" width="2" height="4" fill="#FFFFFF"/>
         <rect x="5" y="13" width="6" height="3" fill="#415A77"/>
       </svg>`,
-      // 角色 4：俏皮捲髮・薄荷綠休閒
       char4: `<svg viewBox="0 0 16 16" width="100%" height="100%" shape-rendering="crispEdges">
         <rect x="4" y="1" width="8" height="3" fill="#8D5B4C"/>
         <rect x="3" y="3" width="10" height="3" fill="#8D5B4C"/>
@@ -726,7 +726,6 @@
         <rect x="4" y="9" width="8" height="4" fill="#00E599"/>
         <rect x="5" y="13" width="6" height="3" fill="#162B32"/>
       </svg>`,
-      // NPC Luke (工程師連帽衫)
       luke: `<svg viewBox="0 0 16 16" width="100%" height="100%" shape-rendering="crispEdges">
         <rect x="4" y="1" width="8" height="3" fill="#2C3E50"/>
         <rect x="4" y="4" width="8" height="1" fill="#2C3E50"/>
@@ -737,7 +736,6 @@
         <rect x="7" y="10" width="2" height="3" fill="#00C2FF"/>
         <rect x="5" y="14" width="6" height="2" fill="#1A252F"/>
       </svg>`,
-      // NPC Una (顧問套裝長髮)
       una: `<svg viewBox="0 0 16 16" width="100%" height="100%" shape-rendering="crispEdges">
         <rect x="4" y="1" width="8" height="3" fill="#6E2C00"/>
         <rect x="3" y="3" width="10" height="4" fill="#6E2C00"/>
@@ -749,6 +747,44 @@
         <rect x="11" y="6" width="2" height="6" fill="#6E2C00"/>
         <rect x="4" y="9" width="8" height="5" fill="#AF7AC5"/>
         <rect x="5" y="14" width="6" height="2" fill="#2E4053"/>
+      </svg>`,
+      // 特寫場景向量圖
+      scene_counter: `<svg viewBox="0 0 100 50" width="100%" height="100%" shape-rendering="crispEdges">
+        <rect x="10" y="25" width="80" height="20" fill="#10253F"/>
+        <rect x="15" y="30" width="70" height="10" fill="#00C2FF" opacity="0.8"/>
+        <rect x="40" y="15" width="20" height="10" fill="#FFFFFF"/>
+        <rect x="43" y="18" width="14" height="2" fill="#00C2FF"/>
+        <rect x="43" y="21" width="10" height="1" fill="#333333"/>
+      </svg>`,
+      scene_showcase: `<svg viewBox="0 0 100 50" width="100%" height="100%" shape-rendering="crispEdges">
+        <rect x="15" y="10" width="70" height="35" fill="#11253D" stroke="#00C2FF" stroke-width="2"/>
+        <rect x="25" y="20" width="12" height="18" fill="#FF7B72"/>
+        <rect x="44" y="15" width="12" height="23" fill="#00E599"/>
+        <rect x="63" y="22" width="12" height="16" fill="#FFD166"/>
+      </svg>`,
+      scene_books: `<svg viewBox="0 0 100 50" width="100%" height="100%" shape-rendering="crispEdges">
+        <rect x="20" y="8" width="60" height="38" fill="#1F344D"/>
+        <rect x="25" y="15" width="8" height="25" fill="#00C2FF"/>
+        <rect x="35" y="18" width="8" height="22" fill="#FFD166"/>
+        <rect x="45" y="12" width="10" height="28" fill="#00E599"/>
+        <rect x="58" y="16" width="8" height="24" fill="#FF7B72"/>
+      </svg>`,
+      scene_neon: `<svg viewBox="0 0 100 50" width="100%" height="100%" shape-rendering="crispEdges">
+        <rect x="10" y="10" width="80" height="30" fill="#081424" stroke="#00C2FF" stroke-width="2"/>
+        <text x="50" y="28" font-size="7" font-weight="bold" fill="#00C2FF" text-anchor="middle" font-family="monospace">店家的成功才是我們的成功</text>
+      </svg>`,
+      scene_globe: `<svg viewBox="0 0 100 50" width="100%" height="100%" shape-rendering="crispEdges">
+        <circle cx="50" cy="25" r="16" fill="#132F4C" stroke="#00C2FF" stroke-width="2"/>
+        <rect x="44" y="18" width="10" height="6" fill="#00E599"/>
+        <rect x="40" y="26" width="8" height="7" fill="#00E599"/>
+        <rect x="54" y="24" width="7" height="8" fill="#00E599"/>
+      </svg>`,
+      scene_whiteboard: `<svg viewBox="0 0 100 50" width="100%" height="100%" shape-rendering="crispEdges">
+        <rect x="15" y="8" width="70" height="36" fill="#EAEDED" stroke="#333" stroke-width="2"/>
+        <rect x="22" y="14" width="14" height="12" fill="#FFD166"/>
+        <rect x="42" y="14" width="14" height="12" fill="#00C2FF"/>
+        <rect x="62" y="14" width="14" height="12" fill="#FF7B72"/>
+        <line x1="20" y1="36" x2="80" y2="36" stroke="#0077B6" stroke-width="2"/>
       </svg>`
     };
 
@@ -766,6 +802,8 @@
       avatar: selectedAvatar,
       startTime: null,
       chapter: 1,
+      playerX: 120,
+      playerY: 220,
       wrongAttempts: 0,
       inventory: {
         item1: false,
@@ -788,43 +826,50 @@
         name: "70萬品牌見證名片",
         icon: "💳",
         title: "全方位零售專家",
-        desc: "SHOPLINE 成立於 2013 年，是擁有十年以上全通路銷售與管理經驗的全方位零售整合專家，致力為各種規模的品牌提供一站式零售解決方案並實現數位轉型，服務客戶涵蓋大型企業、中小型品牌至個人創業者，在全球累計超過 70 萬家品牌客戶。"
+        desc: "SHOPLINE 成立於 2013 年，是擁有十年以上全通路銷售與管理經驗的全方位零售整合專家，致力為各種規模的品牌提供一站式零售解決方案並實現數位轉型，服務客戶涵蓋大型企業、中小型品牌至個人創業者，在全球累計超過 70 萬家品牌客戶。",
+        sceneSvg: PIXEL_ART.scene_counter
       },
       item2: {
         name: "知名品牌合作圖鑑",
         icon: "✨",
         title: "生活中的合作夥伴",
-        desc: "台灣眾多知名品牌皆選擇 SHOPLINE 作為商務拓展與數位升級的長期夥伴，知名企業客戶包含：好好生醫、青鳥旅行、綠藤生機 Greenvines、國家地理服飾、Neogence霓淨思、THE BODY SHOP美體小舖、TOYSELECT、vacanza 等。"
+        desc: "台灣眾多知名品牌皆選擇 SHOPLINE 作為商務拓展與數位升級的長期夥伴，知名企業客戶包含：好好生醫、青鳥旅行、綠藤生機 Greenvines、國家地理服飾、Neogence霓淨思、THE BODY SHOP美體小舖、TOYSELECT、vacanza 等。",
+        sceneSvg: PIXEL_ART.scene_showcase
       },
       item3: {
         name: "電商成長學苑通行證",
         icon: "🎓",
         title: "賦能商家的軟實力",
-        desc: "除了產品功能，SHOPLINE 亦持續以「知識」賦能商家經營的軟實力，設立課程資源最豐富的學習平台「電商成長學苑」，提供系統操作、趨勢講座與檔期實戰班等全方位資源，幫助商家快速掌握專業知識與實用技能。"
+        desc: "除了產品功能，SHOPLINE 亦持續以「知識」賦能商家經營的軟實力，設立課程資源最豐富的學習平台「電商成長學苑」，提供系統操作、趨勢講座與檔期實戰班等全方位資源，幫助商家快速掌握專業知識與實用技能。",
+        sceneSvg: PIXEL_ART.scene_books
       },
       item4: {
         name: "品牌使命指南針",
         icon: "🧭",
         title: "共同的北極星",
-        desc: "不管是技術開發、行銷業務還是後勤支援，SHOPLINE 堅信：「店家的成功才是我們的成功！」，專注實現「品牌的成功，才是 SHOPLINE 的成功」的企業使命，致力為客戶提供最優質的技術與服務。"
+        desc: "不管是技術開發、行銷業務還是後勤支援，SHOPLINE 堅信：「店家的成功才是我們的成功！」，專注實現「品牌的成功，才是 SHOPLINE 的成功」的企業使命，致力為客戶提供最優質的技術與服務。",
+        sceneSvg: PIXEL_ART.scene_neon
       },
       item5: {
         name: "國際團隊地圖",
         icon: "🌐",
         title: "全球化工作團隊",
-        desc: "SHOPLINE 總部設立新加坡，於台灣、日本、美國、英國等地皆設有辦公室據點，組成超過 2,000 名員工的國際化團隊。"
+        desc: "SHOPLINE 總部設立新加坡，於台灣、日本、美國、英國等地皆設有辦公室據點，組成超過 2,000 名員工的國際化團隊。",
+        sceneSvg: PIXEL_ART.scene_globe
       },
       item6: {
         name: "策略顧問放大鏡",
         icon: "🔍",
         title: "從執行到策略的 AI 思維",
-        desc: "成立「AI 轉型委員會」，將 AI 導入內部工作流程。我們推動的不是冷冰冰的取代，而是推動服務模式從「執行任務」進一步升級為「洞察客戶需求、提供策略建議」！"
+        desc: "成立「AI 轉型委員會」，將 AI 導入內部工作流程。我們推動的不是冷冰冰的取代，而是推動服務模式從「執行任務」進一步升級為「洞察客戶需求、提供策略建議」！",
+        sceneSvg: PIXEL_ART.scene_whiteboard
       }
     };
 
     window.onload = function() {
       renderInventoryGrid();
       showLoginModal();
+      setupKeyboardControls();
     };
 
     function showLoginModal() {
@@ -876,6 +921,8 @@
 
       document.getElementById("playerBadgeIcon").innerHTML = gameState.avatar.svg;
       document.getElementById("playerBadgeName").innerText = val;
+      document.getElementById("playerActorName").innerText = val;
+      document.getElementById("playerActorSvg").innerHTML = gameState.avatar.svg;
 
       closeModal();
       loadChapter(1);
@@ -884,82 +931,186 @@
     function loadChapter(ch) {
       gameState.chapter = ch;
       const canvas = document.getElementById("interactiveCanvas");
-      canvas.innerHTML = "";
 
-      // 渲染玩家自己的專屬場景立繪
-      createPlayerOnStage();
+      // 清除舊地圖實體（保留玩家與虛擬方向鍵）
+      const oldObjs = canvas.querySelectorAll(".map-object, .map-npc");
+      oldObjs.forEach(o => o.remove());
+
+      // 重置玩家起始位置
+      setPlayerPos(100, 200);
 
       if (ch === 1) {
         document.getElementById("sceneTitle").innerText = "第 1 章：新手報到！走進 SHOPLINE 零售世界";
         updateProgressCounter();
         renderQuestList();
 
-        createHotspot("item1", "迎賓櫃台", "🏢", "18%", "25%");
-        createHotspot("item2", "品牌櫥窗", "🛍️", "25%", "65%");
-        createHotspot("item3", "書報架", "📚", "58%", "35%");
+        createMapObject("item1", "迎賓櫃台", "🏢", 180, 80);
+        createMapObject("item2", "品牌櫥窗", "🛍️", 360, 90);
+        createMapObject("item3", "書報架", "📚", 220, 260);
 
-        createNpc("Luke", "資深工程師", PIXEL_ART.luke, () => triggerNpcLuke());
+        createMapNpc("Luke", "資深工程師", PIXEL_ART.luke, 380, 240, () => triggerNpcLuke());
       } else {
         document.getElementById("sceneTitle").innerText = "第 2 章：協作前行！文化使命與未來藍圖";
         updateProgressCounter();
         renderQuestList();
 
-        createHotspot("item4", "霓虹光牆", "💡", "18%", "25%");
-        createHotspot("item5", "地球儀", "🌍", "25%", "65%");
-        createHotspot("item6", "AI 白板", "📊", "58%", "35%");
+        createMapObject("item4", "霓虹光牆", "💡", 180, 80);
+        createMapObject("item5", "地球儀", "🌍", 360, 90);
+        createMapObject("item6", "AI 白板", "📊", 220, 260);
 
-        createNpc("Una", "客戶成功顧問", PIXEL_ART.una, () => triggerNpcUna());
+        createMapNpc("Una", "客戶成功顧問", PIXEL_ART.una, 380, 240, () => triggerNpcUna());
       }
     }
 
-    function createPlayerOnStage() {
+    // 移動與位置判定
+    function movePlayer(dx, dy) {
       const canvas = document.getElementById("interactiveCanvas");
-      const el = document.createElement("div");
-      el.className = "player-character-stage";
-      el.innerHTML = `
-        <div class="player-stage-badge">YOU</div>
-        <div class="player-stage-avatar">${gameState.avatar.svg}</div>
-        <div class="player-stage-name">${gameState.userName}</div>
-      `;
-      canvas.appendChild(el);
+      const maxX = canvas.clientWidth - 40;
+      const maxY = canvas.clientHeight - 40;
+
+      let newX = Math.max(30, Math.min(maxX, gameState.playerX + dx));
+      let newY = Math.max(30, Math.min(maxY, gameState.playerY + dy));
+
+      setPlayerPos(newX, newY);
+      checkNearbyInteractables();
     }
 
-    function createHotspot(id, name, icon, top, left) {
+    function setPlayerPos(x, y) {
+      gameState.playerX = x;
+      gameState.playerY = y;
+      const actor = document.getElementById("playerActor");
+      actor.style.left = `${x}px`;
+      actor.style.top = `${y}px`;
+    }
+
+    function checkNearbyInteractables() {
+      const bubble = document.getElementById("actionBubble");
+      const canvas = document.getElementById("interactiveCanvas");
+      const targets = canvas.querySelectorAll(".map-object, .map-npc");
+
+      let nearTarget = null;
+      targets.forEach(t => {
+        const tx = parseFloat(t.dataset.x);
+        const ty = parseFloat(t.dataset.y);
+        const dist = Math.hypot(gameState.playerX - tx, gameState.playerY - ty);
+        if (dist < 65) {
+          nearTarget = t;
+        }
+      });
+
+      if (nearTarget) {
+        bubble.style.display = "block";
+        bubble.innerText = nearTarget.dataset.name ? `調查：${nearTarget.dataset.name}` : "對話 (OK)";
+      } else {
+        bubble.style.display = "none";
+      }
+    }
+
+    function interactNearest() {
+      const canvas = document.getElementById("interactiveCanvas");
+      const targets = canvas.querySelectorAll(".map-object, .map-npc");
+      let closest = null;
+      let minD = 999;
+
+      targets.forEach(t => {
+        const tx = parseFloat(t.dataset.x);
+        const ty = parseFloat(t.dataset.y);
+        const dist = Math.hypot(gameState.playerX - tx, gameState.playerY - ty);
+        if (dist < minD) {
+          minD = dist;
+          closest = t;
+        }
+      });
+
+      if (closest && minD < 80) {
+        closest.click();
+      }
+    }
+
+    function setupKeyboardControls() {
+      window.addEventListener("keydown", (e) => {
+        if (document.getElementById("modalBackdrop").style.display === "flex") return;
+
+        switch (e.key) {
+          case "ArrowUp":
+          case "w":
+          case "W":
+            movePlayer(0, -28);
+            break;
+          case "ArrowDown":
+          case "s":
+          case "S":
+            movePlayer(0, 28);
+            break;
+          case "ArrowLeft":
+          case "a":
+          case "A":
+            movePlayer(-28, 0);
+            break;
+          case "ArrowRight":
+          case "d":
+          case "D":
+            movePlayer(28, 0);
+            break;
+          case "e":
+          case "E":
+          case "Enter":
+          case " ":
+            interactNearest();
+            break;
+        }
+      });
+    }
+
+    function createMapObject(id, name, icon, x, y) {
       const canvas = document.getElementById("interactiveCanvas");
       const el = document.createElement("div");
-      el.className = `hotspot ${gameState.inventory[id] ? "collected" : ""}`;
-      el.id = `hotspot-${id}`;
-      el.style.top = top;
-      el.style.left = left;
+      el.className = `map-object ${gameState.inventory[id] ? "collected" : ""}`;
+      el.id = `mapobj-${id}`;
+      el.style.left = `${x}px`;
+      el.style.top = `${y}px`;
+      el.style.width = "72px";
+      el.style.height = "72px";
+      el.dataset.x = x;
+      el.dataset.y = y;
+      el.dataset.name = name;
       el.innerHTML = `
-        <div class="icon">${icon}</div>
-        <div class="label">${name}</div>
+        <div class="obj-icon">${icon}</div>
+        <div class="obj-label">${name}</div>
       `;
       el.onclick = () => inspectItem(id);
       canvas.appendChild(el);
     }
 
-    function createNpc(name, title, svgArt, onClickHandler) {
+    function createMapNpc(name, title, svgArt, x, y, onClickHandler) {
       const canvas = document.getElementById("interactiveCanvas");
       const el = document.createElement("div");
-      el.className = "npc-character";
+      el.className = "map-npc";
+      el.style.left = `${x}px`;
+      el.style.top = `${y}px`;
+      el.dataset.x = x;
+      el.dataset.y = y;
+      el.dataset.name = name;
       el.innerHTML = `
-        <div class="npc-badge">${title}</div>
-        <div class="npc-avatar-art">${svgArt}</div>
-        <div class="npc-name">${name}</div>
-        <div class="npc-click-hint">點我對話 💬</div>
+        <div class="map-npc-art">${svgArt}</div>
+        <div class="map-npc-name">${name}</div>
       `;
       el.onclick = onClickHandler;
       canvas.appendChild(el);
     }
 
+    // 點擊調查物件（跳出細緻特寫場景＋內容）
     function inspectItem(id) {
       const item = ITEM_CONFIG[id];
       const isCollected = gameState.inventory[id];
 
       const bodyHtml = `
+        <!-- 細緻場景特寫插圖 -->
+        <div class="closeup-scene-card">
+          ${item.sceneSvg}
+        </div>
         <div class="dialogue-bubble">
-          <div style="font-size:32px; margin-right:8px;">${item.icon}</div>
+          <div style="font-size:30px; margin-right:8px;">${item.icon}</div>
           <div class="dialogue-content">
             <div class="dialogue-speaker">${item.title}</div>
             ${item.desc}
@@ -971,7 +1122,7 @@
         ? `<button class="btn" onclick="closeModal()">已放入隨身手冊</button>`
         : `<button class="btn" onclick="collectItem('${id}')">收進隨身手冊 🎒</button>`;
 
-      openModal(`探索調查：${item.name}`, bodyHtml, footHtml);
+      openModal(`場景特寫：${item.name}`, bodyHtml, footHtml);
     }
 
     function collectItem(id) {
@@ -979,8 +1130,8 @@
       renderInventoryGrid();
       updateProgressCounter();
 
-      const hs = document.getElementById(`hotspot-${id}`);
-      if (hs) hs.classList.add("collected");
+      const objEl = document.getElementById(`mapobj-${id}`);
+      if (objEl) objEl.classList.add("collected");
 
       closeModal();
     }
@@ -1050,7 +1201,7 @@
             <div class="dialogue-avatar-box">${PIXEL_ART.luke}</div>
             <div class="dialogue-content">
               <div class="dialogue-speaker">資深工程師 Luke</div>
-              「嗨！歡迎加入！我是研發團隊的 Luke。大廳接待台、展示櫥窗和書報架都有很重要的認識指南，先去逛逛把它們收進隨身手冊，再來找我喔！」
+              「嗨！歡迎加入！我是研發團隊的 Luke。大廳接待台、展示櫥窗和書報架都有很重要的認識指南，走過去把它們收進隨身手冊，再來找我喔！」
             </div>
           </div>
         `;
@@ -1202,7 +1353,7 @@
             <div class="dialogue-avatar-box">${PIXEL_ART.una}</div>
             <div class="dialogue-content">
               <div class="dialogue-speaker">客戶成功顧問 Una</div>
-              「哈囉！我是顧問 Una！露台光牆、地球儀和白板上記錄了我們的核心理念與全球團隊，先去把那 3 樣線索放進手冊，我們再來對齊最後的任務喔！」
+              「哈囉！我是顧問 Una！露台光牆、地球儀和白板上記錄了我們的核心理念與全球團隊，先走過去把它們收進手冊，我們再來對齊最後的任務喔！」
             </div>
           </div>
         `;
@@ -1322,7 +1473,6 @@
     function showFinalVictory() {
       const duration = Math.floor((new Date() - gameState.startTime) / 1000);
 
-      // 背景發送數據至 Google Apps Script
       sendDataToGAS({
         userName: gameState.userName,
         status: "完成",
