@@ -6,16 +6,16 @@
   <title>SHOPLINE 探索檔案：零售生態的日常與未來</title>
   <style>
     :root {
-      --bg-noir: #080c14;
-      --panel-dark: rgba(12, 19, 30, 0.96);
-      --border-soft: #1d334e;
-      --gold-bright: #F3C969;
-      --gold-btn: #e5b952;
-      --cyan-shopline: #00C2FF;
-      --cyan-glow: rgba(0, 194, 255, 0.4);
-      --text-gold: #f8e7b9;
-      --text-main: #E2ECF7;
-      --text-sub: #8B9BB0;
+      --bg-noir: #0c121c;
+      --panel-dark: rgba(14, 22, 34, 0.96);
+      --border-soft: #233c5b;
+      --gold-bright: #F5CD79;
+      --gold-btn: #e6b955;
+      --cyan-accent: #48dbfb;
+      --cyan-glow: rgba(72, 219, 251, 0.4);
+      --text-gold: #f7e8c3;
+      --text-main: #EAF2FB;
+      --text-sub: #95A5B8;
       --serif-font: "Noto Serif TC", "Songti TC", "Georgia", serif;
       --sans-font: "Noto Sans TC", -apple-system, sans-serif;
     }
@@ -41,7 +41,7 @@
 
     header {
       height: 46px;
-      background: #05080e;
+      background: #080d15;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
       align-items: center;
@@ -66,7 +66,7 @@
       font-size: 0.8rem;
     }
 
-    /* 開場 Landing Screen */
+    /* 1. 開場 Landing Screen */
     #landingScreen {
       position: absolute;
       top: 46px;
@@ -86,15 +86,16 @@
       flex: 1.1;
       max-width: 580px;
       height: 480px;
-      border-radius: 6px;
+      border-radius: 8px;
       border: 1px solid var(--border-soft);
       position: relative;
       overflow: hidden;
-      background: #08121f;
+      background: #111a28;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       padding: 30px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
     }
 
     .landing-cover-art {
@@ -103,8 +104,6 @@
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      opacity: 0.55;
     }
 
     .landing-cover-meta {
@@ -145,17 +144,17 @@
 
     .landing-title {
       font-family: var(--serif-font);
-      font-size: 2.4rem;
+      font-size: 2.3rem;
       font-weight: 400;
       color: #ffffff;
       line-height: 1.35;
-      margin: 0 0 24px 0;
+      margin: 0 0 20px 0;
     }
 
     .name-input-field {
       width: 100%;
       padding: 12px 16px;
-      background: #0d1726;
+      background: #111c2c;
       border: 1px solid var(--border-soft);
       border-radius: 4px;
       color: #fff;
@@ -168,8 +167,8 @@
       background: var(--gold-btn);
       color: #0b1118;
       border: none;
-      padding: 14px 28px;
-      font-size: 1rem;
+      padding: 13px 26px;
+      font-size: 0.95rem;
       font-weight: bold;
       border-radius: 4px;
       cursor: pointer;
@@ -180,11 +179,11 @@
     }
 
     .gold-action-btn:hover {
-      background: #ffdb7d;
+      background: #ffd978;
       transform: translateY(-2px);
     }
 
-    /* 主探索畫面 */
+    /* 2. 主探索空間畫面 */
     #gameScreen {
       position: absolute;
       top: 46px;
@@ -192,7 +191,7 @@
       width: 100%;
       height: calc(100% - 46px);
       display: flex;
-      background: #04070c;
+      background: #080d15;
     }
 
     .stage-area {
@@ -205,31 +204,31 @@
     }
 
     .stage-header-nav {
-      padding: 14px 24px;
+      padding: 12px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(6, 10, 16, 0.9);
+      background: rgba(8, 13, 22, 0.92);
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       z-index: 10;
     }
 
     .chapter-heading {
       font-family: var(--serif-font);
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       color: #fff;
       margin-top: 2px;
     }
 
-    /* 橫向真實空間大房間 */
+    /* 手繪風格沉浸舞台 */
     .room-viewport {
       flex: 1;
       position: relative;
       overflow: hidden;
-      background: #070e17;
+      background: #0f1826;
     }
 
-    /* 懸浮發光標籤 (Pins) - 跟隨在家具上方 */
+    /* 懸浮在手繪家具上方的發光標籤 (Pins) */
     .floating-pin {
       position: absolute;
       transform: translate(-50%, -100%);
@@ -238,44 +237,56 @@
       align-items: center;
       cursor: pointer;
       z-index: 25;
-      transition: all 0.2s;
+      transition: transform 0.2s, filter 0.2s;
+    }
+
+    .floating-pin:hover {
+      transform: translate(-50%, -108%) scale(1.06);
+      filter: drop-shadow(0 0 10px var(--cyan-glow));
     }
 
     .pin-circle {
-      width: 36px;
-      height: 36px;
-      background: rgba(14, 25, 42, 0.9);
+      width: 38px;
+      height: 38px;
+      background: rgba(18, 30, 48, 0.92);
       border: 1.5px solid var(--gold-bright);
-      box-shadow: 0 0 12px rgba(243, 201, 105, 0.5);
+      box-shadow: 0 0 14px rgba(245, 205, 121, 0.65);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
+      font-size: 17px;
       color: var(--gold-bright);
+      animation: pulsePin 2s infinite alternate;
+    }
+
+    @keyframes pulsePin {
+      0% { box-shadow: 0 0 8px rgba(245, 205, 121, 0.4); }
+      100% { box-shadow: 0 0 18px rgba(245, 205, 121, 0.9); }
     }
 
     .pin-circle.done {
-      border-color: #00E599;
-      color: #00E599;
-      box-shadow: 0 0 10px rgba(0, 229, 153, 0.5);
+      border-color: #2ed573;
+      color: #2ed573;
+      box-shadow: 0 0 12px rgba(46, 213, 115, 0.6);
     }
 
     .pin-label {
-      background: rgba(5, 9, 15, 0.88);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(10, 16, 26, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       color: #ffffff;
       font-size: 11px;
-      padding: 2px 8px;
+      padding: 3px 8px;
       border-radius: 3px;
       margin-top: 4px;
       white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.7);
     }
 
-    /* 主角與 NPC (在地面走動逛街) */
+    /* 手繪繪本風主角與 NPC (地面左右移動) */
     .floor-actor {
       position: absolute;
-      bottom: 60px;
+      bottom: 42px;
       transform: translateX(-50%);
       display: flex;
       flex-direction: column;
@@ -285,14 +296,14 @@
     }
 
     .actor-figure {
-      width: 54px;
-      height: 78px;
-      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.8));
+      width: 62px;
+      height: 86px;
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.75));
     }
 
     .actor-nametag {
       font-size: 11px;
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(10, 16, 26, 0.88);
       border: 1px solid var(--border-soft);
       padding: 1px 7px;
       border-radius: 3px;
@@ -302,8 +313,8 @@
 
     /* 底部操作條與手冊槽 */
     .stage-footer-bar {
-      height: 82px;
-      background: #05080e;
+      height: 78px;
+      background: #080d15;
       border-top: 1px solid var(--border-soft);
       display: flex;
       align-items: center;
@@ -321,7 +332,7 @@
     }
 
     .kbd {
-      background: #132236;
+      background: #142236;
       border: 1px solid var(--border-soft);
       padding: 2px 7px;
       border-radius: 3px;
@@ -336,10 +347,10 @@
     }
 
     .tray-slot {
-      width: 50px;
-      height: 50px;
-      background: #09111c;
-      border: 1px dashed #263e5e;
+      width: 48px;
+      height: 48px;
+      background: #0c1524;
+      border: 1px dashed #263e61;
       border-radius: 4px;
       display: flex;
       align-items: center;
@@ -351,40 +362,34 @@
 
     .tray-slot.filled {
       border: 1px solid var(--gold-bright);
-      background: rgba(243, 201, 105, 0.1);
-      box-shadow: 0 0 10px rgba(243, 201, 105, 0.25);
+      background: rgba(245, 205, 121, 0.15);
+      box-shadow: 0 0 10px rgba(245, 205, 121, 0.35);
     }
 
-    /* 左右移動控制鈕 (手機專用螢幕按鈕) */
     .mobile-walk-controls {
       display: none;
       gap: 10px;
     }
 
     .walk-btn {
-      width: 44px;
-      height: 44px;
-      background: #112338;
-      border: 1.5px solid var(--cyan-shopline);
-      color: var(--cyan-shopline);
+      width: 42px;
+      height: 42px;
+      background: #12243a;
+      border: 1.5px solid var(--cyan-accent);
+      color: var(--cyan-accent);
       border-radius: 6px;
-      font-size: 20px;
+      font-size: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
     }
 
-    .walk-btn:active {
-      background: var(--cyan-shopline);
-      color: #000;
-    }
-
     /* 右側 Briefing 任務面板 */
     .briefing-sidebar {
       flex: 1;
       background: var(--panel-dark);
-      padding: 28px 24px;
+      padding: 26px 22px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -397,12 +402,12 @@
       font-size: 0.85rem;
       color: var(--gold-bright);
       letter-spacing: 1.5px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .task-main-title {
       font-family: var(--serif-font);
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       color: #fff;
       line-height: 1.4;
       margin-bottom: 16px;
@@ -418,7 +423,7 @@
     .checklist-row {
       font-size: 0.85rem;
       padding: 10px 12px;
-      background: #091321;
+      background: #0c1726;
       border-left: 3px solid #233e61;
       border-radius: 0 4px 4px 0;
       color: var(--text-sub);
@@ -427,12 +432,12 @@
     .checklist-row.checked {
       border-left-color: var(--gold-bright);
       color: #ffffff;
-      background: rgba(243, 201, 105, 0.08);
+      background: rgba(245, 205, 121, 0.1);
     }
 
     .timeline-footer {
       border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 16px;
+      padding-top: 14px;
       font-size: 0.8rem;
     }
 
@@ -455,7 +460,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(3, 6, 10, 0.88);
+      background: rgba(4, 7, 12, 0.88);
       backdrop-filter: blur(8px);
       display: none;
       align-items: center;
@@ -465,9 +470,9 @@
     }
 
     .story-modal-card {
-      background: #0c1524;
+      background: #0e1929;
       border: 1px solid var(--border-soft);
-      border-radius: 6px;
+      border-radius: 8px;
       width: 100%;
       max-width: 560px;
       box-shadow: 0 15px 50px rgba(0, 0, 0, 0.9);
@@ -483,7 +488,7 @@
     .story-card-cover {
       width: 100%;
       height: 160px;
-      background: #060b13;
+      background: #08111d;
       border-bottom: 1px solid var(--border-soft);
       display: flex;
       align-items: center;
@@ -498,7 +503,7 @@
       font-size: 0.85rem;
       letter-spacing: 1.5px;
       color: var(--gold-bright);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .story-card-title {
@@ -523,7 +528,7 @@
 
     .evidence-btn {
       padding: 12px 16px;
-      background: #111e30;
+      background: #142338;
       border: 1px solid var(--border-soft);
       border-radius: 4px;
       color: #fff;
@@ -534,7 +539,7 @@
     }
 
     .evidence-btn:hover {
-      background: #172a45;
+      background: #1a304e;
       border-color: var(--gold-bright);
       color: var(--gold-bright);
     }
@@ -581,18 +586,7 @@
   <!-- 1. 開場 LANDING PAGE -->
   <div id="landingScreen">
     <div class="landing-cover">
-      <svg class="landing-cover-art" viewBox="0 0 500 400" preserveAspectRatio="xMidYMid slice">
-        <defs>
-          <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#0a1d33"/>
-            <stop offset="100%" stop-color="#040810"/>
-          </linearGradient>
-        </defs>
-        <rect width="500" height="400" fill="url(#bgGrad)"/>
-        <line x1="0" y1="320" x2="500" y2="320" stroke="#00C2FF" stroke-width="1.5" opacity="0.6"/>
-        <text x="250" y="240" font-family="'Georgia', serif" font-size="42" font-weight="bold" fill="#00C2FF" text-anchor="middle" letter-spacing="4">SHOPLINE</text>
-        <text x="250" y="275" font-family="sans-serif" font-size="12" fill="#8B9BB0" text-anchor="middle" letter-spacing="3">RETAIL & COMMERCE PLATFORM</text>
-      </svg>
+      <div id="landingCoverArtContainer" class="landing-cover-art"></div>
       <div class="landing-cover-meta">
         <div class="landing-cover-date">2013 — 2026</div>
         <h2 class="landing-cover-title">全通路的旅程，<br>聽見品牌背後的心跳。</h2>
@@ -603,9 +597,9 @@
       <div class="sub-tag">SHOPLINE 入職探索檔案</div>
       <h1 class="landing-title">走進這一天，<br>遇見並肩前行的人。</h1>
       <p style="font-size:0.95rem; line-height:1.85; color:var(--text-sub); margin-bottom:24px;">
-        在同一個真實空間中自由漫步探索。<br>
-        走到迎賓櫃台、品牌櫥窗與書架旁，即可自動觸發展閱線索；<br>
-        與前輩交談交付任務，一步步拼起屬於 SHOPLINE 的文化全貌。
+        在手繪質感的 SHOPLINE 空間自由漫步探索。<br>
+        走近發光家具將自動觸發展閱線索；<br>
+        與引導同仁交流、交付任務，拼起屬於團隊的核心密碼。
       </p>
 
       <div style="margin-bottom:20px;">
@@ -613,12 +607,12 @@
       </div>
 
       <button class="gold-action-btn" onclick="startAdventure()">
-        走進 SHOPLINE 空間漫步 ➔
+        走進手繪探索空間 ➔
       </button>
     </div>
   </div>
 
-  <!-- 2. 主探索空間畫面 (橫向真實空間) -->
+  <!-- 2. 主探索空間畫面 (手繪質感大房間) -->
   <div id="gameScreen" style="display:none;">
     <div class="stage-area">
       <div class="stage-header-nav">
@@ -631,109 +625,37 @@
         </div>
       </div>
 
-      <!-- 真正的大房間橫向舞台 (真實空間透視與家具固定擺放) -->
+      <!-- 手繪沉浸大舞台 -->
       <div class="room-viewport" id="roomViewport">
-        
-        <svg id="roomSceneSvg" viewBox="0 0 900 480" width="100%" height="100%" preserveAspectRatio="none" style="position:absolute; top:0; left:0;">
-          <defs>
-            <linearGradient id="wallGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#0b1728"/>
-              <stop offset="65%" stop-color="#060c15"/>
-            </linearGradient>
-            <linearGradient id="floorGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#102035"/>
-              <stop offset="100%" stop-color="#05090f"/>
-            </linearGradient>
-          </defs>
+        <!-- 完整的插畫場景 SVG (動態切換第 1 章/第 2 章) -->
+        <div id="sceneIllustrationContainer" style="position:absolute; top:0; left:0; width:100%; height:100%;"></div>
 
-          <!-- 空間牆壁與木質/科技地坪透視 -->
-          <rect x="0" y="0" width="900" height="320" fill="url(#wallGradient)"/>
-          <polygon points="0,320 900,320 900,480 0,480" fill="url(#floorGradient)"/>
-          <line x1="0" y1="320" x2="900" y2="320" stroke="#1d3859" stroke-width="2"/>
-          <line x1="180" y1="320" x2="50" y2="480" stroke="rgba(29,56,89,0.3)" stroke-width="1.5"/>
-          <line x1="400" y1="320" x2="320" y2="480" stroke="rgba(29,56,89,0.3)" stroke-width="1.5"/>
-          <line x1="680" y1="320" x2="740" y2="480" stroke="rgba(29,56,89,0.3)" stroke-width="1.5"/>
-
-          <!-- 空間大型落地玻璃外景與 SHOPLINE 發光招牌 -->
-          <rect x="300" y="60" width="300" height="180" fill="#050a12" stroke="#00C2FF" stroke-width="1.5" opacity="0.7"/>
-          <text x="450" y="155" font-family="'Georgia', serif" font-size="28" font-weight="bold" fill="#00C2FF" text-anchor="middle" opacity="0.85">SHOPLINE</text>
-
-          <!-- ====== 固定擺設的真實家具物件 ====== -->
-          <!-- 物件 1 位置 (X: 180) -->
-          <g id="furniture1">
-            <!-- 迎賓櫃台 -->
-            <rect x="110" y="240" width="140" height="85" fill="#11233a" stroke="#00C2FF" stroke-width="2" rx="4"/>
-            <rect x="130" y="255" width="100" height="15" fill="#1b395e" rx="2"/>
-            <circle cx="180" cy="295" r="8" fill="#00C2FF" opacity="0.7"/>
-          </g>
-
-          <!-- 物件 2 位置 (X: 450) -->
-          <g id="furniture2">
-            <!-- 品牌透明玻璃展示櫥窗 -->
-            <rect x="380" y="190" width="140" height="135" fill="rgba(12,27,48,0.7)" stroke="#F3C969" stroke-width="2" rx="4"/>
-            <line x1="380" y1="260" x2="520" y2="260" stroke="#F3C969" stroke-width="1.5"/>
-            <!-- 櫥窗內的品牌模型商品 -->
-            <rect x="400" y="225" width="22" height="35" fill="#FF7B72" rx="2"/>
-            <rect x="440" y="215" width="20" height="45" fill="#00E599" rx="2"/>
-            <rect x="480" y="230" width="22" height="30" fill="#00C2FF" rx="2"/>
-          </g>
-
-          <!-- 物件 3 位置 (X: 720) -->
-          <g id="furniture3">
-            <!-- 學習資源木質書報架 -->
-            <rect x="660" y="200" width="120" height="125" fill="#14263d" stroke="#2a4d78" stroke-width="2" rx="3"/>
-            <line x1="660" y1="240" x2="780" y2="240" stroke="#2a4d78" stroke-width="1.5"/>
-            <line x1="660" y1="280" x2="780" y2="280" stroke="#2a4d78" stroke-width="1.5"/>
-            <!-- 書本擺設 -->
-            <rect x="675" y="215" width="10" height="25" fill="#00C2FF"/>
-            <rect x="690" y="220" width="12" height="20" fill="#F3C969"/>
-            <rect x="730" y="255" width="10" height="25" fill="#00E599"/>
-            <rect x="745" y="250" width="14" height="30" fill="#FF7B72"/>
-          </g>
-        </svg>
-
-        <!-- 家具上方的發光引導標籤 (跟隨家具 X 座標) -->
-        <div class="floating-pin" id="pinObj1" style="left: 20%; top: 48%;" onclick="triggerObjectByIndex(1)">
+        <!-- 3 個發光標籤 (釘選在手繪家具正上方) -->
+        <div class="floating-pin" id="pinObj1" style="left: 18%; top: 48%;" onclick="triggerObjectByIndex(1)">
           <div class="pin-circle" id="pinCirc1">📍</div>
           <div class="pin-label" id="pinLabel1">迎賓接待台</div>
         </div>
 
-        <div class="floating-pin" id="pinObj2" style="left: 50%; top: 38%;" onclick="triggerObjectByIndex(2)">
+        <div class="floating-pin" id="pinObj2" style="left: 48%; top: 48%;" onclick="triggerObjectByIndex(2)">
           <div class="pin-circle" id="pinCirc2">📍</div>
           <div class="pin-label" id="pinLabel2">品牌展示櫥窗</div>
         </div>
 
-        <div class="floating-pin" id="pinObj3" style="left: 80%; top: 40%;" onclick="triggerObjectByIndex(3)">
+        <div class="floating-pin" id="pinObj3" style="left: 76%; top: 48%;" onclick="triggerObjectByIndex(3)">
           <div class="pin-circle" id="pinCirc3">📍</div>
           <div class="pin-label" id="pinLabel3">學習資源書架</div>
         </div>
 
-        <!-- NPC 站立在房間最右側 (X: 92%) -->
+        <!-- NPC 站立在右側等待交流 (手繪插畫立繪) -->
         <div class="floor-actor" id="npcActor" style="left: 92%;" onclick="triggerNpcByWalk()">
-          <div class="actor-figure" id="npcFigureBox">
-            <!-- 向量立繪 -->
-          </div>
+          <div class="actor-figure" id="npcFigureBox"></div>
           <div class="actor-nametag" id="npcNameBox" style="color:var(--text-gold);">Luke</div>
         </div>
 
-        <!-- 主角漫步實體 (在地面左右移動) -->
+        <!-- 主角手繪繪本風漫步實體 (在地面左右移動) -->
         <div class="floor-actor" id="playerActor" style="left: 6%;">
-          <div class="actor-figure">
-            <svg viewBox="0 0 16 22" width="100%" height="100%" shape-rendering="crispEdges">
-              <!-- 頭部與頭髮 -->
-              <rect x="5" y="1" width="6" height="2" fill="#3A2312"/>
-              <rect x="4" y="3" width="8" height="3" fill="#3A2312"/>
-              <rect x="5" y="6" width="6" height="5" fill="#FCD0A1"/>
-              <rect x="6" y="7" width="1" height="1" fill="#000"/>
-              <rect x="9" y="7" width="1" height="1" fill="#000"/>
-              <rect x="7" y="9" width="2" height="1" fill="#E2847A"/>
-              <!-- 身體與褲子 -->
-              <rect x="4" y="11" width="8" height="6" fill="#00C2FF"/>
-              <rect x="5" y="17" width="2" height="5" fill="#1B2A4A"/>
-              <rect x="9" y="17" width="2" height="5" fill="#1B2A4A"/>
-            </svg>
-          </div>
-          <div class="actor-nametag" id="playerNameTag" style="color:var(--cyan-shopline);">探索者</div>
+          <div class="actor-figure" id="playerFigureBox"></div>
+          <div class="actor-nametag" id="playerNameTag" style="color:var(--cyan-accent);">探索者</div>
         </div>
       </div>
 
@@ -743,7 +665,6 @@
           <span class="kbd">A</span><span class="kbd">D</span> 或 <span class="kbd">◀ ▶</span> 在空間漫步逛街（走近自動跳出資訊）
         </div>
 
-        <!-- 手機專用左右行走按鈕 -->
         <div class="mobile-walk-controls">
           <div class="walk-btn" onclick="walkStep(-5)">◀</div>
           <div class="walk-btn" onclick="walkStep(5)">▶</div>
@@ -788,7 +709,7 @@
     </div>
   </div>
 
-  <!-- 沉浸式情境對話與特寫彈窗 -->
+  <!-- 沉浸式情境彈窗 -->
   <div class="story-modal-backdrop" id="storyModal">
     <div class="story-modal-card">
       <div class="story-card-cover" id="modalCover"></div>
@@ -802,15 +723,199 @@
   </div>
 
   <script>
-    // 遊戲狀態機
+    // 手繪插畫向量資產庫 (溫馨厚塗感，非寫實照片，亦非抽象線條)
+    const ILLUSTRATIONS = {
+      // 開場封面插圖
+      cover: `<svg viewBox="0 0 500 400" width="100%" height="100%" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="cBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#14243b"/><stop offset="100%" stop-color="#0a121d"/></linearGradient>
+          <linearGradient id="cFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a3f5f"/><stop offset="100%" stop-color="#101927"/></linearGradient>
+        </defs>
+        <rect width="500" height="400" fill="url(#cBg)"/>
+        <polygon points="0,290 500,290 500,400 0,400" fill="url(#cFloor)"/>
+        <line x1="0" y1="290" x2="500" y2="290" stroke="#3d5a80" stroke-width="2"/>
+        <!-- 手繪溫馨落地窗 -->
+        <rect x="80" y="50" width="340" height="190" fill="#0d1827" stroke="#48dbfb" stroke-width="2" rx="6" opacity="0.8"/>
+        <!-- 窗外柔和夜景城市輪廓 -->
+        <rect x="110" y="140" width="35" height="100" fill="#1b2a3f"/>
+        <rect x="155" y="110" width="45" height="130" fill="#172538"/>
+        <rect x="210" y="130" width="40" height="110" fill="#1f3047"/>
+        <rect x="260" y="90" width="55" height="150" fill="#152132"/>
+        <rect x="325" y="125" width="45" height="115" fill="#1a283c"/>
+        <circle cx="280" cy="80" r="14" fill="#F5CD79" opacity="0.3"/>
+        <!-- SHOPLINE 發光招牌 -->
+        <text x="250" y="210" font-family="'Georgia', serif" font-size="34" font-weight="bold" fill="#48dbfb" text-anchor="middle" letter-spacing="4">SHOPLINE</text>
+      </svg>`,
+
+      // 第 1 章：大廳手繪場景 (含迎賓台、展示櫃、書架)
+      ch1_scene: `<svg viewBox="0 0 900 480" width="100%" height="100%" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="wGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#142236"/><stop offset="70%" stop-color="#0d1726"/></linearGradient>
+          <linearGradient id="fGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#314868"/><stop offset="100%" stop-color="#121b29"/></linearGradient>
+          <linearGradient id="warmLight" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(245,205,121,0.25)"/><stop offset="100%" stop-color="transparent"/></linearGradient>
+        </defs>
+        <!-- 牆面與暖質地坪透視 -->
+        <rect x="0" y="0" width="900" height="310" fill="url(#wGrad)"/>
+        <polygon points="0,310 900,310 900,480 0,480" fill="url(#fGrad)"/>
+        <line x1="0" y1="310" x2="900" y2="310" stroke="#365074" stroke-width="2.5"/>
+        <line x1="150" y1="310" x2="30" y2="480" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
+        <line x1="420" y1="310" x2="350" y2="480" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
+        <line x1="700" y1="310" x2="760" y2="480" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
+
+        <!-- 柔和暖色頂燈光暈 -->
+        <polygon points="120,0 240,0 280,310 80,310" fill="url(#warmLight)"/>
+        <polygon points="400,0 520,0 560,310 360,310" fill="url(#warmLight)"/>
+        <polygon points="680,0 800,0 840,310 640,310" fill="url(#warmLight)"/>
+
+        <!-- 落地大窗與 SHOPLINE 標誌 -->
+        <rect x="280" y="50" width="340" height="160" fill="#0c1624" stroke="#253e5e" stroke-width="2" rx="4"/>
+        <text x="450" y="145" font-family="'Georgia', serif" font-size="28" font-weight="bold" fill="#48dbfb" text-anchor="middle" letter-spacing="3" opacity="0.9">SHOPLINE</text>
+
+        <!-- 手繪家具 1：迎賓接待台 (左側) -->
+        <g id="drawCounter">
+          <rect x="100" y="225" width="140" height="85" fill="#1d304a" stroke="#3d6291" stroke-width="2" rx="6"/>
+          <rect x="115" y="240" width="110" height="16" fill="#294469" rx="3"/>
+          <circle cx="170" cy="285" r="9" fill="#48dbfb" opacity="0.8"/>
+        </g>
+
+        <!-- 手繪家具 2：生活品牌櫥窗 (中央) -->
+        <g id="drawShowcase">
+          <rect x="375" y="180" width="150" height="130" fill="rgba(19,34,54,0.85)" stroke="#F5CD79" stroke-width="2" rx="6"/>
+          <line x1="375" y1="245" x2="525" y2="245" stroke="#F5CD79" stroke-width="1.5"/>
+          <!-- 手繪質感商品模型 -->
+          <rect x="395" y="210" width="24" height="35" fill="#ff7675" rx="3"/>
+          <rect x="438" y="200" width="22" height="45" fill="#55efc4" rx="3"/>
+          <rect x="480" y="215" width="24" height="30" fill="#74b9ff" rx="3"/>
+          <circle cx="410" cy="275" r="10" fill="#F5CD79"/>
+          <circle cx="490" cy="275" r="10" fill="#a29bfe"/>
+        </g>
+
+        <!-- 手繪家具 3：學習資源木質書報架 (右側) -->
+        <g id="drawBooks">
+          <rect x="660" y="180" width="130" height="130" fill="#23354d" stroke="#3e5d85" stroke-width="2" rx="5"/>
+          <line x1="660" y1="225" x2="790" y2="225" stroke="#3e5d85" stroke-width="1.5"/>
+          <line x1="660" y1="270" x2="790" y2="270" stroke="#3e5d85" stroke-width="1.5"/>
+          <!-- 排列書本 -->
+          <rect x="675" y="195" width="12" height="30" fill="#48dbfb" rx="1"/>
+          <rect x="692" y="200" width="14" height="25" fill="#F5CD79" rx="1"/>
+          <rect x="735" y="240" width="12" height="30" fill="#55efc4" rx="1"/>
+          <rect x="752" y="235" width="15" height="35" fill="#ff7675" rx="1"/>
+        </g>
+      </svg>`,
+
+      // 第 2 章：露台交流手繪場景 (霓虹光牆、地球儀、白板)
+      ch2_scene: `<svg viewBox="0 0 900 480" width="100%" height="100%" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="wGrad2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#121e30"/><stop offset="70%" stop-color="#0a121e"/></linearGradient>
+          <linearGradient id="fGrad2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a3d59"/><stop offset="100%" stop-color="#0d1624"/></linearGradient>
+        </defs>
+        <rect x="0" y="0" width="900" height="310" fill="url(#wGrad2)"/>
+        <polygon points="0,310 900,310 900,480 0,480" fill="url(#fGrad2)"/>
+        <line x1="0" y1="310" x2="900" y2="310" stroke="#365074" stroke-width="2.5"/>
+
+        <!-- 手繪家具 4：文化標語霓虹光牆 (左側) -->
+        <g id="drawNeon">
+          <rect x="80" y="150" width="180" height="90" fill="#08101a" stroke="#48dbfb" stroke-width="2" rx="6"/>
+          <text x="170" y="200" font-family="'Noto Serif TC', serif" font-size="12" font-weight="bold" fill="#48dbfb" text-anchor="middle" letter-spacing="1">店家的成功</text>
+          <text x="170" y="222" font-family="'Noto Serif TC', serif" font-size="11" fill="#F5CD79" text-anchor="middle">才是我們的成功</text>
+        </g>
+
+        <!-- 手繪家具 5：全球據點地球儀 (中央) -->
+        <g id="drawGlobe">
+          <rect x="420" y="240" width="60" height="70" fill="#1c2d44" stroke="#355177" stroke-width="1.5" rx="4"/>
+          <circle cx="450" cy="190" r="34" fill="#14263e" stroke="#F5CD79" stroke-width="2"/>
+          <ellipse cx="450" cy="190" rx="34" ry="12" fill="none" stroke="#F5CD79" stroke-dasharray="3,3"/>
+          <circle cx="450" cy="190" r="4" fill="#48dbfb"/>
+        </g>
+
+        <!-- 手繪家具 6：AI 轉型討論白板 (右側) -->
+        <g id="drawWhiteboard">
+          <rect x="660" y="140" width="140" height="110" fill="#EBF2FA" stroke="#2c3e50" stroke-width="3" rx="4"/>
+          <rect x="675" y="160" width="28" height="24" fill="#F5CD79" rx="2"/>
+          <rect x="715" y="160" width="28" height="24" fill="#48dbfb" rx="2"/>
+          <rect x="755" y="160" width="28" height="24" fill="#ff7675" rx="2"/>
+          <line x1="680" y1="210" x2="780" y2="210" stroke="#34495e" stroke-width="2"/>
+          <line x1="700" y1="250" x2="685" y2="310" stroke="#34495e" stroke-width="2.5"/>
+          <line x1="760" y1="250" x2="775" y2="310" stroke="#34495e" stroke-width="2.5"/>
+        </g>
+      </svg>`,
+
+      // 手繪繪本風主角 (柔和輪廓手繪小人，帶斜背探索包)
+      player: `<svg viewBox="0 0 60 85" width="100%" height="100%">
+        <!-- 陰影 -->
+        <ellipse cx="30" cy="80" rx="18" ry="4" fill="rgba(0,0,0,0.45)"/>
+        <!-- 雙腳 -->
+        <rect x="22" y="60" width="6" height="18" fill="#1d2d44" rx="3"/>
+        <rect x="32" y="60" width="6" height="18" fill="#1d2d44" rx="3"/>
+        <!-- 身體/上衣 (天藍色) -->
+        <rect x="18" y="34" width="24" height="28" fill="#48dbfb" rx="6"/>
+        <!-- 斜背包帶與隨身小包 -->
+        <line x1="20" y1="36" x2="38" y2="58" stroke="#8c6d3f" stroke-width="2.5"/>
+        <rect x="34" y="52" width="10" height="9" fill="#e67e22" rx="2"/>
+        <!-- 頭部與柔和五官 -->
+        <circle cx="30" cy="22" r="14" fill="#fde3a7"/>
+        <circle cx="26" cy="22" r="1.8" fill="#2c3e50"/>
+        <circle cx="34" cy="22" r="1.8" fill="#2c3e50"/>
+        <path d="M 28 27 Q 30 29 32 27" stroke="#d35400" stroke-width="1.2" fill="none"/>
+        <!-- 深褐手繪短髮 -->
+        <path d="M 16 20 C 16 10, 44 10, 44 20 C 44 14, 38 8, 30 8 C 22 8, 16 14, 16 20 Z" fill="#4a2f1b"/>
+        <path d="M 16 18 Q 22 22 26 17" fill="#4a2f1b"/>
+      </svg>`,
+
+      // Luke 手繪立繪 (工程師連帽衫)
+      luke: `<svg viewBox="0 0 60 85" width="100%" height="100%">
+        <ellipse cx="30" cy="80" rx="18" ry="4" fill="rgba(0,0,0,0.45)"/>
+        <rect x="22" y="60" width="6" height="18" fill="#141f2d" rx="3"/>
+        <rect x="32" y="60" width="6" height="18" fill="#141f2d" rx="3"/>
+        <rect x="17" y="34" width="26" height="28" fill="#34495e" rx="6"/>
+        <polygon points="26,34 34,34 30,42" fill="#48dbfb"/>
+        <circle cx="30" cy="22" r="14" fill="#fcdbb0"/>
+        <circle cx="26" cy="22" r="1.8" fill="#1a252f"/>
+        <circle cx="34" cy="22" r="1.8" fill="#1a252f"/>
+        <path d="M 27 27 Q 30 29 33 27" stroke="#c0392b" stroke-width="1.2" fill="none"/>
+        <path d="M 16 19 C 16 8, 44 8, 44 19 C 44 12, 38 6, 30 6 C 22 6, 16 12, 16 19 Z" fill="#2c3e50"/>
+      </svg>`,
+
+      // Una 手繪立繪 (顧問長髮套裝)
+      una: `<svg viewBox="0 0 60 85" width="100%" height="100%">
+        <ellipse cx="30" cy="80" rx="18" ry="4" fill="rgba(0,0,0,0.45)"/>
+        <rect x="22" y="60" width="6" height="18" fill="#243342" rx="3"/>
+        <rect x="32" y="60" width="6" height="18" fill="#243342" rx="3"/>
+        <rect x="18" y="34" width="24" height="28" fill="#9b59b6" rx="6"/>
+        <circle cx="30" cy="22" r="14" fill="#fde3a7"/>
+        <circle cx="26" cy="22" r="1.8" fill="#2c3e50"/>
+        <circle cx="34" cy="22" r="1.8" fill="#2c3e50"/>
+        <path d="M 28 27 Q 30 29 32 27" stroke="#e74c3c" stroke-width="1.2" fill="none"/>
+        <!-- 手繪長髮 -->
+        <path d="M 15 22 C 15 8, 45 8, 45 22 C 45 35, 43 45, 40 48 C 39 40, 42 22, 42 20 C 42 12, 36 6, 30 6 C 24 6, 18 12, 18 20 C 18 22, 21 40, 20 48 C 17 45, 15 35, 15 22 Z" fill="#6e2c00"/>
+      </svg>`,
+
+      // 特寫卡片
+      counterArt: `<svg viewBox="0 0 300 120" width="100%" height="100%"><rect width="300" height="120" fill="#0c1626"/><rect x="30" y="35" width="240" height="55" fill="#1b2d45" stroke="#48dbfb" stroke-width="2" rx="6"/><rect x="115" y="20" width="70" height="35" fill="#ffffff" rx="4"/><text x="150" y="43" font-family="'Georgia', serif" font-size="13" fill="#48dbfb" text-anchor="middle" font-weight="bold">700,000+</text></svg>`,
+      showcaseArt: `<svg viewBox="0 0 300 120" width="100%" height="100%"><rect width="300" height="120" fill="#0c1626"/><rect x="40" y="15" width="220" height="90" fill="#142337" stroke="#F5CD79" stroke-width="2" rx="6"/><circle cx="80" cy="60" r="20" fill="#ff7675"/><circle cx="150" cy="60" r="20" fill="#55efc4"/><circle cx="220" cy="60" r="20" fill="#74b9ff"/></svg>`,
+      booksArt: `<svg viewBox="0 0 300 120" width="100%" height="100%"><rect width="300" height="120" fill="#0c1626"/><rect x="50" y="15" width="200" height="90" fill="#1c2c43" stroke="#37557e" stroke-width="2" rx="4"/><rect x="70" y="35" width="20" height="60" fill="#48dbfb" rx="2"/><rect x="95" y="45" width="20" height="50" fill="#F5CD79" rx="2"/><rect x="120" y="30" width="25" height="65" fill="#55efc4" rx="2"/><rect x="150" y="40" width="18" height="55" fill="#ff7675" rx="2"/></svg>`,
+      neonArt: `<svg viewBox="0 0 300 120" width="100%" height="100%"><rect width="300" height="120" fill="#070e17"/><rect x="20" y="25" width="260" height="70" fill="#0c192b" stroke="#48dbfb" stroke-width="2" rx="6"/><text x="150" y="66" font-family="'Noto Serif TC', serif" font-size="14" fill="#48dbfb" text-anchor="middle" font-weight="bold" letter-spacing="2">店家的成功才是我們的成功</text></svg>`,
+      globeArt: `<svg viewBox="0 0 300 120" width="100%" height="100%"><rect width="300" height="120" fill="#0c1626"/><circle cx="150" cy="60" r="40" fill="#15263d" stroke="#F5CD79" stroke-width="2"/><text x="150" y="65" font-family="sans-serif" font-size="11" fill="#fff" text-anchor="middle">SG / TW / JP / US / UK</text></svg>`,
+      aiBoardArt: `<svg viewBox="0 0 300 120" width="100%" height="100%"><rect width="300" height="120" fill="#0c1626"/><rect x="30" y="15" width="240" height="90" fill="#EBF2FA" stroke="#2c3e50" stroke-width="2" rx="4"/><rect x="50" y="30" width="35" height="30" fill="#F5CD79" rx="2"/><rect x="100" y="30" width="35" height="30" fill="#48dbfb" rx="2"/><rect x="150" y="30" width="35" height="30" fill="#ff7675" rx="2"/></svg>`
+    };
+
+    const ITEMS = {
+      item1: { name: "70萬品牌見證名片", title: "全方位零售專家", desc: "SHOPLINE 成立於 2013 年，是擁有十年以上全通路銷售與管理經驗的全方位零售整合專家，致力為各種規模的品牌提供一站式零售解決方案並實現數位轉型，服務客戶涵蓋大型企業、中小型品牌至個人創業者，在全球累計超過 70 萬家品牌客戶。", art: ILLUSTRATIONS.counterArt, icon: "💳" },
+      item2: { name: "知名品牌合作圖鑑", title: "生活中的合作夥伴", desc: "台灣眾多知名品牌皆選擇 SHOPLINE 作為商務拓展與數位升級的長期夥伴，知名企業客戶包含：好好生醫、青鳥旅行、綠藤生機 Greenvines、國家地理服飾、Neogence霓淨思、THE BODY SHOP美體小舖、TOYSELECT、vacanza 等。", art: ILLUSTRATIONS.showcaseArt, icon: "✨" },
+      item3: { name: "電商成長學苑通行證", title: "賦能商家的軟實力", desc: "除了產品功能，SHOPLINE 亦持續以「知識」賦能商家經營的軟實力，設立課程資源最豐富的學習平台「電商成長學苑」，提供系統操作、趨勢講座與檔期實戰班等全方位資源，幫助商家快速掌握專業知識與實用技能。", art: ILLUSTRATIONS.booksArt, icon: "🎓" },
+      item4: { name: "品牌使命指南針", title: "共同的北極星", desc: "不管是技術開發、行銷業務還是後勤支援，SHOPLINE 堅信：「店家的成功才是我們的成功！」，專注實現「品牌的成功，才是 SHOPLINE 的成功」的企業使命，致力為客戶提供最優質的技術與服務。", art: ILLUSTRATIONS.neonArt, icon: "🧭" },
+      item5: { name: "國際團隊地圖", title: "全球化工作團隊", desc: "SHOPLINE 總部設立新加坡，於台灣、日本、美國、英國等地皆設有辦公室據點，組成超過 2,000 名員工的國際化團隊。", art: ILLUSTRATIONS.globeArt, icon: "🌐" },
+      item6: { name: "策略顧問放大鏡", title: "從執行到策略的 AI 思維", desc: "成立「AI 轉型委員會」，將 AI 導入內部工作流程。我們推動的不是冷冰冰的取代，而是推動服務模式從「執行任務」進一步升級為「洞察客戶需求、提供策略建議」！", art: ILLUSTRATIONS.aiBoardArt, icon: "🔍" }
+    };
+
     const gameState = {
       userName: "探索者",
       startTime: null,
       chapter: 1,
-      playerX: 6, // % (0 ~ 100)
+      playerX: 6,
       wrongAttempts: 0,
       modalOpen: false,
-      lastTriggered: null, // 防止在同個位置重複自動彈出
+      lastTriggered: null,
       inventory: {
         item1: false, item2: false, item3: false,
         item4: false, item5: false, item6: false
@@ -820,42 +925,9 @@
       }
     };
 
-    // 向量人物與場景圖形
-    const GRAPHICS = {
-      lukeActor: `<svg viewBox="0 0 16 22" width="100%" height="100%" shape-rendering="crispEdges">
-        <rect x="4" y="1" width="8" height="4" fill="#2C3E50"/>
-        <rect x="5" y="5" width="6" height="5" fill="#F5CBA7"/>
-        <rect x="6" y="7" width="1" height="1" fill="#000"/>
-        <rect x="9" y="7" width="1" height="1" fill="#000"/>
-        <rect x="4" y="10" width="8" height="7" fill="#34495E"/>
-        <rect x="7" y="11" width="2" height="4" fill="#00C2FF"/>
-        <rect x="5" y="17" width="2" height="5" fill="#1A252F"/>
-        <rect x="9" y="17" width="2" height="5" fill="#1A252F"/>
-      </svg>`,
-      unaActor: `<svg viewBox="0 0 16 22" width="100%" height="100%" shape-rendering="crispEdges">
-        <rect x="4" y="1" width="8" height="5" fill="#6E2C00"/>
-        <rect x="5" y="6" width="6" height="5" fill="#FADBD8"/>
-        <rect x="6" y="8" width="1" height="1" fill="#1B2631"/>
-        <rect x="9" y="8" width="1" height="1" fill="#1B2631"/>
-        <rect x="4" y="11" width="8" height="6" fill="#AF7AC5"/>
-        <rect x="5" y="17" width="2" height="5" fill="#2E4053"/>
-        <rect x="9" y="17" width="2" height="5" fill="#2E4053"/>
-      </svg>`,
-      counterArt: `<svg viewBox="0 0 300 120" width="100%" height="100%"><rect width="300" height="120" fill="#091424"/><rect x="30" y="40" width="240" height="50" fill="#12253d" stroke="#00C2FF" stroke-width="1.5"/><rect x="120" y="25" width="60" height="30" fill="#ffffff" rx="3"/><text x="150" y="45" font-family="'Georgia', serif" font-size="11" fill="#00C2FF" text-anchor="middle" font-weight="bold">700,000+</text></svg>`,
-      showcaseArt: `<svg viewBox="0 0 300 120" width="100%" height="100%"><rect width="300" height="120" fill="#091424"/><rect x="40" y="20" width="220" height="80" fill="#0c1d33" stroke="#F3C969" stroke-width="1.5"/><circle cx="80" cy="60" r="18" fill="#FF7B72"/><circle cx="150" cy="60" r="18" fill="#00E599"/><circle cx="220" cy="60" r="18" fill="#00C2FF"/></svg>`,
-      booksArt: `<svg viewBox="0 0 300 120" width="100%" height="100%"><rect width="300" height="120" fill="#091424"/><rect x="50" y="15" width="200" height="90" fill="#15263d" stroke="#1d3b5e" stroke-width="1.5"/><rect x="70" y="35" width="20" height="60" fill="#00C2FF"/><rect x="95" y="45" width="20" height="50" fill="#F3C969"/><rect x="120" y="30" width="25" height="65" fill="#00E599"/></svg>`,
-      neonArt: `<svg viewBox="0 0 300 120" width="100%" height="100%"><rect width="300" height="120" fill="#050a12"/><rect x="20" y="30" width="260" height="60" fill="#091526" stroke="#00C2FF" stroke-width="2"/><text x="150" y="66" font-family="'Noto Serif TC', serif" font-size="14" fill="#00C2FF" text-anchor="middle" font-weight="bold" letter-spacing="2">店家的成功才是我們的成功</text></svg>`,
-      globeArt: `<svg viewBox="0 0 300 120" width="100%" height="100%"><rect width="300" height="120" fill="#091424"/><circle cx="150" cy="60" r="38" fill="#0c1d33" stroke="#F3C969" stroke-width="1.5"/><text x="150" y="65" font-family="sans-serif" font-size="11" fill="#fff" text-anchor="middle">SG / TW / JP / US / UK</text></svg>`,
-      aiBoardArt: `<svg viewBox="0 0 300 120" width="100%" height="100%"><rect width="300" height="120" fill="#091424"/><rect x="30" y="15" width="240" height="90" fill="#EAEDED" stroke="#333" stroke-width="2"/><rect x="50" y="30" width="35" height="30" fill="#F3C969"/><rect x="100" y="30" width="35" height="30" fill="#00C2FF"/><rect x="150" y="30" width="35" height="30" fill="#FF7B72"/></svg>`
-    };
-
-    const ITEMS = {
-      item1: { name: "70萬品牌見證名片", title: "全方位零售專家", desc: "SHOPLINE 成立於 2013 年，是擁有十年以上全通路銷售與管理經驗的全方位零售整合專家，致力為各種規模的品牌提供一站式零售解決方案並實現數位轉型，服務客戶涵蓋大型企業、中小型品牌至個人創業者，在全球累計超過 70 萬家品牌客戶。", art: GRAPHICS.counterArt, icon: "💳" },
-      item2: { name: "知名品牌合作圖鑑", title: "生活中的合作夥伴", desc: "台灣眾多知名品牌皆選擇 SHOPLINE 作為商務拓展與數位升級的長期夥伴，知名企業客戶包含：好好生醫、青鳥旅行、綠藤生機 Greenvines、國家地理服飾、Neogence霓淨思、THE BODY SHOP美體小舖、TOYSELECT、vacanza 等。", art: GRAPHICS.showcaseArt, icon: "✨" },
-      item3: { name: "電商成長學苑通行證", title: "賦能商家的軟實力", desc: "除了產品功能，SHOPLINE 亦持續以「知識」賦能商家經營的軟實力，設立課程資源最豐富的學習平台「電商成長學苑」，提供系統操作、趨勢講座與檔期實戰班等全方位資源，幫助商家快速掌握專業知識與實用技能。", art: GRAPHICS.booksArt, icon: "🎓" },
-      item4: { name: "品牌使命指南針", title: "共同的北極星", desc: "不管是技術開發、行銷業務還是後勤支援，SHOPLINE 堅信：「店家的成功才是我們的成功！」，專注實現「品牌的成功，才是 SHOPLINE 的成功」的企業使命，致力為客戶提供最優質的技術與服務。", art: GRAPHICS.neonArt, icon: "🧭" },
-      item5: { name: "國際團隊地圖", title: "全球化工作團隊", desc: "SHOPLINE 總部設立新加坡，於台灣、日本、美國、英國等地皆設有辦公室據點，組成超過 2,000 名員工的國際化團隊。", art: GRAPHICS.globeArt, icon: "🌐" },
-      item6: { name: "策略顧問放大鏡", title: "從執行到策略的 AI 思維", desc: "成立「AI 轉型委員會」，將 AI 導入內部工作流程。我們推動的不是冷冰冰的取代，而是推動服務模式從「執行任務」進一步升級為「洞察客戶需求、提供策略建議」！", art: GRAPHICS.aiBoardArt, icon: "🔍" }
+    window.onload = function() {
+      document.getElementById("landingCoverArtContainer").innerHTML = ILLUSTRATIONS.cover;
+      document.getElementById("playerFigureBox").innerHTML = ILLUSTRATIONS.player;
     };
 
     function startAdventure() {
@@ -881,41 +953,47 @@
       gameState.lastTriggered = null;
       updatePlayerPos();
 
+      const container = document.getElementById("sceneIllustrationContainer");
+
       if (ch === 1) {
+        container.innerHTML = ILLUSTRATIONS.ch1_scene;
         document.getElementById("chapterSubHeader").innerText = "CHAPTER 01 / 2013 - NOW";
         document.getElementById("chapterMainHeader").innerText = "新手報到！走進 SHOPLINE 零售世界";
         document.getElementById("briefingTaskNum").innerText = "01";
         document.getElementById("briefingTaskTitle").innerText = "迎賓大廳：確認我們的夥伴與規模";
 
-        document.getElementById("npcFigureBox").innerHTML = GRAPHICS.lukeActor;
+        document.getElementById("npcFigureBox").innerHTML = ILLUSTRATIONS.luke;
         document.getElementById("npcNameBox").innerText = "Luke";
 
-        setPinVisual("pinObj1", "迎賓接待台", gameState.inventory.item1);
-        setPinVisual("pinObj2", "品牌展示櫥窗", gameState.inventory.item2);
-        setPinVisual("pinObj3", "學習資源書架", gameState.inventory.item3);
+        setPinVisual("pinObj1", 18, 48, "迎賓接待台", gameState.inventory.item1);
+        setPinVisual("pinObj2", 48, 48, "品牌展示櫥窗", gameState.inventory.item2);
+        setPinVisual("pinObj3", 76, 48, "學習資源書架", gameState.inventory.item3);
       } else {
+        container.innerHTML = ILLUSTRATIONS.ch2_scene;
         document.getElementById("chapterSubHeader").innerText = "CHAPTER 02 / CULTURE & FUTURE";
         document.getElementById("chapterMainHeader").innerText = "協作前行！文化使命與未來藍圖";
         document.getElementById("briefingTaskNum").innerText = "02";
         document.getElementById("briefingTaskTitle").innerText = "交流露台：對齊文化核心與轉型心態";
 
-        document.getElementById("npcFigureBox").innerHTML = GRAPHICS.unaActor;
+        document.getElementById("npcFigureBox").innerHTML = ILLUSTRATIONS.una;
         document.getElementById("npcNameBox").innerText = "Una";
 
         document.getElementById("timeRow1").classList.remove("active");
         document.getElementById("timeRow2").classList.add("active");
 
-        setPinVisual("pinObj1", "文化霓虹光牆", gameState.inventory.item4);
-        setPinVisual("pinObj2", "全球地圖儀", gameState.inventory.item5);
-        setPinVisual("pinObj3", "AI 轉型白板", gameState.inventory.item6);
+        setPinVisual("pinObj1", 18, 48, "文化霓虹光牆", gameState.inventory.item4);
+        setPinVisual("pinObj2", 50, 48, "全球地圖儀", gameState.inventory.item5);
+        setPinVisual("pinObj3", 78, 48, "AI 轉型白板", gameState.inventory.item6);
       }
 
       updateTray();
       updateChecklist();
     }
 
-    function setPinVisual(pinId, label, isDone) {
+    function setPinVisual(pinId, left, top, label, isDone) {
       const pin = document.getElementById(pinId);
+      pin.style.left = `${left}%`;
+      pin.style.top = `${top}%`;
       pin.querySelector(".pin-label").innerText = label;
       const circ = pin.querySelector(".pin-circle");
       if (isDone) {
@@ -927,7 +1005,6 @@
       }
     }
 
-    // 行走控制與近身自動感應 (Proximity Trigger)
     function setupKeyboardControls() {
       window.addEventListener("keydown", (e) => {
         if (gameState.modalOpen) return;
@@ -951,12 +1028,12 @@
       actor.style.left = `${gameState.playerX}%`;
     }
 
-    // 核心亮點：走到家具旁邊自動觸發彈出資訊！
+    // 走到家具旁自動跳出資訊
     function checkAutoProximity() {
       const x = gameState.playerX;
 
-      // 物件 1 (X: 20%) 觸發範圍 16% ~ 24%
-      if (Math.abs(x - 20) <= 3) {
+      // 家具 1 (X: 18%)
+      if (Math.abs(x - 18) <= 3) {
         if (gameState.lastTriggered !== "obj1") {
           gameState.lastTriggered = "obj1";
           triggerObjectByIndex(1);
@@ -964,8 +1041,8 @@
         return;
       }
 
-      // 物件 2 (X: 50%) 觸發範圍 46% ~ 54%
-      if (Math.abs(x - 50) <= 3) {
+      // 家具 2 (X: 48%)
+      if (Math.abs(x - 48) <= 3) {
         if (gameState.lastTriggered !== "obj2") {
           gameState.lastTriggered = "obj2";
           triggerObjectByIndex(2);
@@ -973,8 +1050,8 @@
         return;
       }
 
-      // 物件 3 (X: 80%) 觸發範圍 76% ~ 84%
-      if (Math.abs(x - 80) <= 3) {
+      // 家具 3 (X: 76%)
+      if (Math.abs(x - 76) <= 3) {
         if (gameState.lastTriggered !== "obj3") {
           gameState.lastTriggered = "obj3";
           triggerObjectByIndex(3);
@@ -991,7 +1068,6 @@
         return;
       }
 
-      // 離開觸發區後，解除鎖定，允許下次再次觸發
       gameState.lastTriggered = null;
     }
 
@@ -1066,12 +1142,12 @@
       }
     }
 
-    // 與 NPC 對話
+    // NPC 對話
     function triggerNpcByWalk() {
       if (gameState.chapter === 1) {
         const ready = gameState.inventory.item1 && gameState.inventory.item2 && gameState.inventory.item3;
         if (!ready) {
-          showDialog(GRAPHICS.lukeActor, "資深工程師 Luke", "大廳引導提示", "「嗨！歡迎加入！大廳接待台、展示櫥窗和書報架都有很重要的認識指南，走過去把它們收進隨身手冊，再來找我喔！」", `
+          showDialog(ILLUSTRATIONS.luke, "資深工程師 Luke", "大廳引導提示", "「嗨！歡迎加入！大廳接待台、展示櫥窗和書報架都有很重要的認識指南，走過去把它們收進隨身手冊，再來找我喔！」", `
             <button class="gold-action-btn" style="width:100%; justify-content:center;" onclick="closeModal()">好的，我先去逛逛收集</button>
           `);
           return;
@@ -1082,14 +1158,14 @@
         } else if (!gameState.tasks.q2) {
           triggerTask2();
         } else {
-          showDialog(GRAPHICS.lukeActor, "資深工程師 Luke", "第 1 章圓滿完成", "「第一章任務全數搞定！大廳後方的電梯已經解鎖，快去 2 樓的協作交流露台找 Una 吧！」", `
+          showDialog(ILLUSTRATIONS.luke, "資深工程師 Luke", "第 1 章圓滿完成", "「第一章任務全數搞定！大廳後方的電梯已經解鎖，快去 2 樓的協作交流露台找 Una 吧！」", `
             <button class="gold-action-btn" style="width:100%; justify-content:center;" onclick="loadChapter(2); closeModal();">前往第 2 章 ➔</button>
           `);
         }
       } else {
         const ready = gameState.inventory.item4 && gameState.inventory.item5 && gameState.inventory.item6;
         if (!ready) {
-          showDialog(GRAPHICS.unaActor, "客戶成功顧問 Una", "露台引導提示", "「哈囉！我是顧問 Una！露台光牆、地球儀和白板上記錄了我們的核心理念與全球團隊，先走過去把它們收進手冊，我們再來對齊最後的任務喔！」", `
+          showDialog(ILLUSTRATIONS.una, "客戶成功顧問 Una", "露台引導提示", "「哈囉！我是顧問 Una！露台光牆、地球儀和白板上記錄了我們的核心理念與全球團隊，先走過去把它們收進手冊，我們再來對齊最後的任務喔！」", `
             <button class="gold-action-btn" style="width:100%; justify-content:center;" onclick="closeModal()">好的，我先去收集</button>
           `);
           return;
@@ -1106,7 +1182,7 @@
     }
 
     function triggerTask1() {
-      showDialog(GRAPHICS.lukeActor, "資深工程師 Luke", "情境任務 1：客戶定位", "「歡迎加入！讓我們一起來認識 SHOPLINE 大家庭。我是 Luke，看到你的手冊已經收齊了入門筆記！有些新夥伴常問：『我們到底在服務誰？只做大品牌還是只做小網拍？』你能從手冊挑出對應的道具解答嗎？」", `
+      showDialog(ILLUSTRATIONS.luke, "資深工程師 Luke", "情境任務 1：客戶定位", "「歡迎加入！讓我們一起來認識 SHOPLINE 大家庭。我是 Luke，看到你的手冊已經收齊了入門筆記！有些新夥伴常問：『我們到底在服務誰？只做大品牌還是只做小網拍？』你能從手冊挑出對應的道具解答嗎？」", `
         <div class="evidence-options">
           <div class="evidence-btn" onclick="answerQ1(true)">💳 出示手冊：[70萬品牌見證名片]</div>
           <div class="evidence-btn" onclick="answerQ1(false, 1)">✨ 出示手冊：[知名品牌合作圖鑑]</div>
@@ -1119,20 +1195,20 @@
       if (correct) {
         gameState.tasks.q1 = true;
         updateChecklist();
-        showDialog(GRAPHICS.lukeActor, "資深工程師 Luke", "回答正確！", "「答對了！我們致力於為各種規模的品牌提供一站式零售解決方案，從小創業者到大企業，全球已有超過 70 萬家品牌客戶！」", `
+        showDialog(ILLUSTRATIONS.luke, "資深工程師 Luke", "回答正確！", "「答對了！我們致力於為各種規模的品牌提供一站式零售解決方案，從小創業者到大企業，全球已有超過 70 萬家品牌客戶！」", `
           <button class="gold-action-btn" style="width:100%; justify-content:center;" onclick="triggerTask2()">進行下一項任務 ➔</button>
         `);
       } else {
         gameState.wrongAttempts++;
         const hint = hintType === 1 ? "這張是具體的合作品牌，再找找看手冊裡記錄著『服務對象涵蓋哪些規模』的那張名片喔！" : "這是我們的培訓平台！請找找看記錄著客戶定位與累積 70 萬客戶的那張名片！";
-        showDialog(GRAPHICS.lukeActor, "資深工程師 Luke", "線索提示", `「${hint}」`, `
+        showDialog(ILLUSTRATIONS.luke, "資深工程師 Luke", "線索提示", `「${hint}」`, `
           <button class="gold-action-btn" style="width:100%; justify-content:center;" onclick="triggerTask1()">重新出示</button>
         `);
       }
     }
 
     function triggerTask2() {
-      showDialog(GRAPHICS.lukeActor, "資深工程師 Luke", "情境任務 2：生活品牌連連看", "「其實我們的系統就在大家的日常生活中！走在路上逛街常常能遇到我們的客戶，你手冊裡有沒有記載具體有哪些大家熟悉的品牌？」", `
+      showDialog(ILLUSTRATIONS.luke, "資深工程師 Luke", "情境任務 2：生活品牌連連看", "「其實我們的系統就在大家的日常生活中！走在路上逛街常常能遇到我們的客戶，你手冊裡有沒有記載具體有哪些大家熟悉的品牌？」", `
         <div class="evidence-options">
           <div class="evidence-btn" onclick="answerQ2(true)">✨ 出示手冊：[知名品牌合作圖鑑]（綠藤生機、vacanza、青鳥旅行...）</div>
           <div class="evidence-btn" onclick="answerQ2(false, 1)">💳 出示手冊：[70萬品牌見證名片]</div>
@@ -1145,20 +1221,20 @@
       if (correct) {
         gameState.tasks.q2 = true;
         updateChecklist();
-        showDialog(GRAPHICS.lukeActor, "資深工程師 Luke", "第 1 章圓滿完成！", "「完全正確！從美妝、保養到飾品、點心，這些大家愛逛的品牌都是我們的長期夥伴！第一章任務全數搞定，快搭電梯去 2 樓露台找 Una 吧！」", `
+        showDialog(ILLUSTRATIONS.luke, "資深工程師 Luke", "第 1 章圓滿完成！", "「完全正確！從美妝、保養到飾品、點心，這些大家愛逛的品牌都是我們的長期夥伴！第一章任務全數搞定，快搭電梯去 2 樓露台找 Una 吧！」", `
           <button class="gold-action-btn" style="width:100%; justify-content:center;" onclick="loadChapter(2); closeModal();">前往第 2 章 ➔</button>
         `);
       } else {
         gameState.wrongAttempts++;
         const hint = hintType === 1 ? "這張寫的是總客戶數量，手冊裡有一份記錄了具體知名品牌名稱的圖鑑，拿那份給我看看！" : "這張是給商家上課用的，再翻翻看展示櫥窗找到的品牌圖鑑吧！";
-        showDialog(GRAPHICS.lukeActor, "資深工程師 Luke", "線索提示", `「${hint}」`, `
+        showDialog(ILLUSTRATIONS.luke, "資深工程師 Luke", "線索提示", `「${hint}」`, `
           <button class="gold-action-btn" style="width:100%; justify-content:center;" onclick="triggerTask2()">重新出示</button>
         `);
       }
     }
 
     function triggerTask3() {
-      showDialog(GRAPHICS.unaActor, "客戶成功顧問 Una", "情境任務 3：團隊核心使命", "「嗨！恭喜你抵達第二章！在 SHOPLINE，不論是否具有電商經驗，只要掌握我們共同的使命與對未來的期待，就能快速融入大家。在我們日常工作中，SHOPLINE 最核心的企業使命與信念是什麼？」", `
+      showDialog(ILLUSTRATIONS.una, "客戶成功顧問 Una", "情境任務 3：團隊核心使命", "「嗨！恭喜你抵達第二章！在 SHOPLINE，不論是否具有電商經驗，只要掌握我們共同的使命與對未來的期待，就能快速融入大家。在我們日常工作中，SHOPLINE 最核心的企業使命與信念是什麼？」", `
         <div class="evidence-options">
           <div class="evidence-btn" onclick="answerQ3(true)">🧭 出示手冊：[品牌使命指南針]（店家的成功才是我們的成功！）</div>
           <div class="evidence-btn" onclick="answerQ3(false, 1)">🌐 出示手冊：[國際團隊地圖]</div>
@@ -1171,20 +1247,20 @@
       if (correct) {
         gameState.tasks.q3 = true;
         updateChecklist();
-        showDialog(GRAPHICS.unaActor, "客戶成功顧問 Una", "回答正確！", "「完全正確！『店家的成功才是我們的成功』是我們所有人的北極星，只有客戶成功，SHOPLINE 才會成功！」", `
+        showDialog(ILLUSTRATIONS.una, "客戶成功顧問 Una", "回答正確！", "「完全正確！『店家的成功才是我們的成功』是我們所有人的北極星，只有客戶成功，SHOPLINE 才會成功！」", `
           <button class="gold-action-btn" style="width:100%; justify-content:center;" onclick="triggerTask4()">進行最後挑戰 ➔</button>
         `);
       } else {
         gameState.wrongAttempts++;
         const hint = hintType === 1 ? "這是我們的辦公室分佈！請回頭找找那面閃閃發光、寫著我們最高精神指標的霓虹光牆道具！" : "這是我們 AI 轉型的方法！但最根本的心態與使命是關於『店家的成功』喔，換一個試試！";
-        showDialog(GRAPHICS.unaActor, "客戶成功顧問 Una", "線索提示", `「${hint}」`, `
+        showDialog(ILLUSTRATIONS.una, "客戶成功顧問 Una", "線索提示", `「${hint}」`, `
           <button class="gold-action-btn" style="width:100%; justify-content:center;" onclick="triggerTask3()">重新出示</button>
         `);
       }
     }
 
     function triggerTask4() {
-      showDialog(GRAPHICS.unaActor, "客戶成功顧問 Una", "情境任務 4：AI 轉型思維", "「最後一題！我們近年提出了四大 AI 佈局方向。我們成立『AI 轉型委員會』希望把服務模式提升到什麼層次？」", `
+      showDialog(ILLUSTRATIONS.una, "客戶成功顧問 Una", "情境任務 4：AI 轉型思維", "「最後一題！我們近年提出了四大 AI 佈局方向。我們成立『AI 轉型委員會』希望把服務模式提升到什麼層次？」", `
         <div class="evidence-options">
           <div class="evidence-btn" onclick="answerQ4(true)">🔍 出示手冊：[策略顧問放大鏡]（從執行任務升級為洞察需求、策略建議）</div>
           <div class="evidence-btn" onclick="answerQ4(false, 1)">🧭 出示手冊：[品牌使命指南針]</div>
@@ -1201,7 +1277,7 @@
       } else {
         gameState.wrongAttempts++;
         const hint = hintType === 1 ? "這是核心使命！請看白板上針對『AI 轉型委員會』推動工作模式升級的具體描述喔！" : "這張是全球據點分佈，再看一下記錄著服務升級方向的白板筆記吧！";
-        showDialog(GRAPHICS.unaActor, "客戶成功顧問 Una", "線索提示", `「${hint}」`, `
+        showDialog(ILLUSTRATIONS.una, "客戶成功顧問 Una", "線索提示", `「${hint}」`, `
           <button class="gold-action-btn" style="width:100%; justify-content:center;" onclick="triggerTask4()">重新出示</button>
         `);
       }
@@ -1232,7 +1308,7 @@
         </div>
       `;
 
-      showDialog(GRAPHICS.counterArt, "入職檔案結算", "通關認證達成", bodyHtml, `
+      showDialog(ILLUSTRATIONS.counterArt, "入職檔案結算", "通關認證達成", bodyHtml, `
         <button class="gold-action-btn" style="width:100%; justify-content:center;" onclick="location.reload()">重新探索</button>
       `);
     }
