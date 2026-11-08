@@ -66,7 +66,7 @@
       font-size: 0.8rem;
     }
 
-    /* 1. 開場 Landing Screen (修正比例不裁切) */
+    /* 1. 開場 Landing Screen */
     #landingScreen {
       position: absolute;
       top: 46px;
@@ -213,7 +213,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(180deg, rgba(4, 7, 12, 0.1) 0%, rgba(4, 7, 12, 0) 65%, rgba(4, 7, 12, 0.4) 100%);
+      background: linear-gradient(180deg, rgba(4, 7, 12, 0.08) 0%, rgba(4, 7, 12, 0) 65%, rgba(4, 7, 12, 0.4) 100%);
       pointer-events: none;
     }
 
@@ -272,7 +272,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.7);
     }
 
-    /* 地面走動的人物實體 (支援上下左右與滑鼠尋路) */
+    /* 地面走動的人物實體（減緩過渡速度，更為溫潤平滑） */
     .floor-actor {
       position: absolute;
       transform: translateX(-50%);
@@ -280,24 +280,26 @@
       flex-direction: column;
       align-items: center;
       z-index: 35;
-      transition: left 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), bottom 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      /* 調整為 0.95 秒平滑緩步移動 */
+      transition: left 0.95s cubic-bezier(0.25, 0.1, 0.25, 1), bottom 0.95s cubic-bezier(0.25, 0.1, 0.25, 1);
       pointer-events: none;
     }
 
     .actor-figure {
-      width: 72px;
-      height: 104px;
-      filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.85));
+      width: 76px;
+      height: 110px;
+      filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.85));
     }
 
     .actor-nametag {
       font-size: 11px;
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(10, 18, 30, 0.9);
       border: 1px solid var(--border-soft);
-      padding: 1px 7px;
-      border-radius: 3px;
+      padding: 2px 8px;
+      border-radius: 4px;
       margin-top: 2px;
       white-space: nowrap;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.5);
     }
 
     /* 底部操作條與手冊槽 */
@@ -423,7 +425,7 @@
       font-weight: bold;
     }
 
-    /* 3. 沉浸式情境對話與證書彈窗 (修復證書比例完整不裁切) */
+    /* 3. 沉浸式情境對話與證書彈窗 */
     .story-modal-backdrop {
       position: fixed;
       top: 0;
@@ -460,7 +462,7 @@
 
     .story-card-cover {
       width: 100%;
-      height: 250px; /* 擴展高度確保證書完整 */
+      height: 250px;
       background: #03060a;
       border-bottom: 1px solid var(--border-soft);
       display: flex;
@@ -472,7 +474,7 @@
     .story-card-cover img {
       width: 100%;
       height: 100%;
-      object-fit: contain; /* 確保認證證書字樣與獎盃 100% 完整不被切掉 */
+      object-fit: contain;
     }
 
     .story-card-body {
@@ -569,7 +571,7 @@
       <h1 class="landing-title">走進這一天，<br>遇見並肩前行的人。</h1>
       <p style="font-size:0.95rem; line-height:1.85; color:var(--text-sub); margin-bottom:24px;">
         置身於 3D Low Poly 微縮模型大廳中漫步探索。<br>
-        可使用鍵盤 <b>WASD / 方向鍵</b>，或<b>直接以滑鼠點選資源包</b>，主角將自動走向目標。<br>
+        可使用鍵盤 <b>WASD / 方向鍵</b>，或<b>直接點選地圖上的資源包</b>，角色會平滑漫步走向目標。<br>
         與引導同仁提問交談，逐步破譯團隊的核心使命！
       </p>
 
@@ -596,10 +598,10 @@
         </div>
       </div>
 
-      <!-- 3D 繪本微縮舞台 (支援點選地圖任意走動) -->
+      <!-- 3D 繪本微縮舞台 -->
       <div class="room-viewport" id="roomViewport" onclick="handleViewportClick(event)">
         
-        <!-- 3 個發光標籤 (滑鼠點擊時主角自動走過去觸發) -->
+        <!-- 3 個發光標籤 -->
         <div class="floating-pin" id="pinObj1" style="left: 11%; top: 56%;" onclick="navigateTo(11, 45, () => triggerObjectByIndex(1))">
           <div class="pin-circle" id="pinCirc1">📍</div>
           <div class="pin-label" id="pinLabel1">迎賓接待台</div>
@@ -621,7 +623,7 @@
           <div class="actor-nametag" id="npcNameBox" style="color:var(--text-gold);">Luke</div>
         </div>
 
-        <!-- 主角小人 (完全同款 Low Poly 3D 人體比例與切面) -->
+        <!-- 主角小人 -->
         <div class="floor-actor" id="playerActor" style="left: 6%; bottom: 45px;">
           <div class="actor-figure" id="playerFigureBox"></div>
           <div class="actor-nametag" id="playerNameTag" style="color:var(--cyan-shopline);">探索者</div>
@@ -631,7 +633,7 @@
       <!-- 底部操作條與手冊槽 -->
       <div class="stage-footer-bar">
         <div class="keypad-guide">
-          <span class="kbd">W</span><span class="kbd">A</span><span class="kbd">S</span><span class="kbd">D</span> 或 <span class="kbd">▲ ◀ ▼ ▶</span> 上下左右走動（或點選圖上資源包，角色會自動走過去）
+          <span class="kbd">W</span><span class="kbd">A</span><span class="kbd">S</span><span class="kbd">D</span> 或 <span class="kbd">▲ ◀ ▼ ▶</span> 漫步走動（或點選資源包自動慢步前往）
         </div>
 
         <div style="display:flex; align-items:center; gap:14px;">
@@ -699,10 +701,9 @@
       startTime: null,
       chapter: 1,
       playerX: 6,
-      playerY: 45, // bottom 像素深度
+      playerY: 45,
       wrongAttempts: 0,
       modalOpen: false,
-      isMoving: false,
       lastTriggered: null,
       inventory: {
         item1: false, item2: false, item3: false,
@@ -713,49 +714,79 @@
       }
     };
 
-    // 真正的 Low Poly 3D 人物造型（與底圖完全同款切面與比例）
+    // 依據截圖同款還原的 3D Low Poly 多邊形模型向量繪製
     const LOW_POLY_CHARACTERS = {
+      // 依據截圖：深藍夾克、白色內搭、深藍長褲與微側邁步姿態
       player: `
-        <svg viewBox="0 0 60 90" width="100%" height="100%">
-          <polygon points="12,85 48,85 42,89 18,89" fill="rgba(0,0,0,0.45)"/>
-          <polygon points="20,58 28,58 26,85 19,85" fill="#182330"/>
-          <polygon points="32,58 40,58 41,85 34,85" fill="#101822"/>
-          <polygon points="16,30 44,30 41,60 19,60" fill="#1c6ba0"/>
-          <polygon points="26,30 34,30 33,60 27,60" fill="#ffffff"/>
-          <polygon points="16,30 26,30 24,60 19,60" fill="#155580"/>
-          <polygon points="34,30 44,30 41,60 36,60" fill="#247cb8"/>
-          <polygon points="20,15 40,15 38,30 22,30" fill="#fcdbb0"/>
-          <polygon points="25,21 27,21 27,23 25,23" fill="#1a252f"/>
-          <polygon points="33,21 35,21 35,23 33,23" fill="#1a252f"/>
-          <polygon points="18,15 42,15 38,5 22,5" fill="#1e2b37"/>
+        <svg viewBox="0 0 60 90" width="100%" height="100%" shape-rendering="geometricPrecision">
+          <ellipse cx="30" cy="86" rx="16" ry="3.5" fill="rgba(0,0,0,0.35)"/>
+          <!-- 雙腿多邊形立體剪裁 -->
+          <polygon points="21,54 28,54 23,83 17,83" fill="#1c2533"/>
+          <polygon points="28,54 36,54 38,81 31,81" fill="#151d28"/>
+          <!-- 鞋子 -->
+          <polygon points="17,83 24,83 23,86 15,86" fill="#11161f"/>
+          <polygon points="31,81 39,81 40,84 31,84" fill="#0d1219"/>
+          <!-- 夾克軀幹與白內搭 (Low Poly 切面光影) -->
+          <polygon points="18,28 30,28 29,56 18,55" fill="#1e5883"/>
+          <polygon points="30,28 41,28 41,55 31,56" fill="#286e9e"/>
+          <polygon points="27,28 33,28 32,56 28,56" fill="#f0f3f6"/>
+          <!-- 手臂與手部 -->
+          <polygon points="15,30 18,29 23,48 19,49" fill="#1b4f76"/>
+          <polygon points="19,49 23,48 24,53 20,54" fill="#f3caa1"/>
+          <polygon points="41,29 44,31 41,50 38,49" fill="#2d7bb0"/>
+          <polygon points="38,49 41,50 40,55 37,54" fill="#f3caa1"/>
+          <!-- 臉部與多邊形俐落短髮 -->
+          <polygon points="24,14 36,14 34,28 24,28" fill="#f6cca4"/>
+          <polygon points="23,17 26,17 25,25 22,25" fill="#ebbe94"/>
+          <polygon points="32,20 34,20 34,22 32,22" fill="#2c343f"/>
+          <polygon points="20,13 38,11 36,4 21,5" fill="#212a35"/>
+          <polygon points="20,13 25,13 23,5" fill="#1b222b"/>
+          <polygon points="33,12 38,11 36,4" fill="#2c3644"/>
         </svg>
       `,
+      // Luke：同款 Low Poly 藍色連帽衛衣與休閒深色長褲
       luke: `
-        <svg viewBox="0 0 60 90" width="100%" height="100%">
-          <polygon points="12,85 48,85 42,89 18,89" fill="rgba(0,0,0,0.45)"/>
-          <polygon points="20,58 28,58 26,85 19,85" fill="#1b2a3a"/>
-          <polygon points="32,58 40,58 41,85 34,85" fill="#131e2b"/>
-          <polygon points="16,30 44,30 42,60 18,60" fill="#287fa8"/>
-          <polygon points="25,30 35,30 30,42" fill="#00C2FF"/>
-          <polygon points="20,15 40,15 38,30 22,30" fill="#fcdbb0"/>
-          <polygon points="25,21 27,21 27,23 25,23" fill="#000"/>
-          <polygon points="33,21 35,21 35,23 33,23" fill="#000"/>
-          <polygon points="18,15 42,15 38,5 22,5" fill="#1a5276"/>
+        <svg viewBox="0 0 60 90" width="100%" height="100%" shape-rendering="geometricPrecision">
+          <ellipse cx="30" cy="86" rx="16" ry="3.5" fill="rgba(0,0,0,0.35)"/>
+          <polygon points="21,54 28,54 24,83 18,83" fill="#1d2736"/>
+          <polygon points="28,54 36,54 37,81 31,81" fill="#171f2c"/>
+          <polygon points="18,83 25,83 24,86 16,86" fill="#11161f"/>
+          <polygon points="31,81 38,81 39,84 31,84" fill="#0d1219"/>
+          <!-- 連帽衛衣 (Low Poly 切面) -->
+          <polygon points="18,28 42,28 40,56 19,56" fill="#2b77a1"/>
+          <polygon points="25,28 35,28 30,38" fill="#00C2FF"/>
+          <polygon points="18,28 25,28 22,56 19,56" fill="#236387"/>
+          <polygon points="35,28 42,28 40,56 37,56" fill="#328bbd"/>
+          <!-- 手臂與手 -->
+          <polygon points="15,30 18,29 21,48 17,49" fill="#225f82"/>
+          <polygon points="17,49 21,48 22,53 18,54" fill="#f3caa1"/>
+          <polygon points="42,29 45,30 43,49 39,48" fill="#3493c8"/>
+          <polygon points="39,48 43,49 42,54 38,53" fill="#f3caa1"/>
+          <!-- 臉部與髮型 -->
+          <polygon points="24,14 36,14 34,28 23,28" fill="#f6cca4"/>
+          <polygon points="31,20 33,20 33,22 31,22" fill="#222"/>
+          <polygon points="20,13 38,11 36,4 21,5" fill="#1c2b38"/>
         </svg>
       `,
+      // Una：同款 Low Poly 都會紫紅西裝外套與米白長褲
       una: `
-        <svg viewBox="0 0 60 90" width="100%" height="100%">
-          <polygon points="12,85 48,85 42,89 18,89" fill="rgba(0,0,0,0.45)"/>
-          <polygon points="20,58 28,58 26,85 19,85" fill="#22313f"/>
-          <polygon points="32,58 40,58 41,85 34,85" fill="#19242e"/>
-          <polygon points="17,30 43,30 41,60 19,60" fill="#8e44ad"/>
-          <polygon points="26,30 34,30 31,60 29,60" fill="#ecf0f1"/>
-          <polygon points="20,15 40,15 38,30 22,30" fill="#fde3a7"/>
-          <polygon points="25,21 27,21 27,23 25,23" fill="#2c3e50"/>
-          <polygon points="33,21 35,21 35,23 33,23" fill="#2c3e50"/>
-          <polygon points="16,16 44,16 40,5 20,5" fill="#5d2c00"/>
-          <polygon points="16,16 20,44 24,16" fill="#4a2300"/>
-          <polygon points="44,16 40,44 36,16" fill="#6e3500"/>
+        <svg viewBox="0 0 60 90" width="100%" height="100%" shape-rendering="geometricPrecision">
+          <ellipse cx="30" cy="86" rx="16" ry="3.5" fill="rgba(0,0,0,0.35)"/>
+          <polygon points="21,54 28,54 24,83 18,83" fill="#e2decb"/>
+          <polygon points="28,54 36,54 37,81 31,81" fill="#d2cebc"/>
+          <polygon points="18,83 25,83 24,86 16,86" fill="#2b2823"/>
+          <polygon points="31,81 38,81 39,84 31,84" fill="#221f1a"/>
+          <!-- 都會套裝與淺色襯衫 -->
+          <polygon points="18,28 42,28 40,56 19,56" fill="#7d3c7d"/>
+          <polygon points="26,28 34,28 32,56 28,56" fill="#fdfefe"/>
+          <polygon points="18,28 26,28 23,56 19,56" fill="#693269"/>
+          <polygon points="34,28 42,28 40,56 36,56" fill="#8f468f"/>
+          <!-- 臉部與微縮長髮 -->
+          <polygon points="24,14 36,14 34,28 23,28" fill="#fbe1be"/>
+          <polygon points="31,20 33,20 33,22 31,22" fill="#332"/>
+          <polygon points="20,13 38,11 36,4 21,5" fill="#46250f"/>
+          <polygon points="19,13 22,34 25,13" fill="#3a1e0b"/>
+          <polygon points="35,13 38,34 40,13" fill="#542d13"/>
         </svg>
       `
     };
@@ -860,33 +891,33 @@
       }
     }
 
-    // 上下左右鍵盤操作支援
+    // 減緩鍵盤移動步進速度，提供沉浸感
     function setupControls() {
       window.addEventListener("keydown", (e) => {
         if (gameState.modalOpen) return;
-        const speedX = 3;
-        const speedY = 5;
+        const speedX = 1.2; // 降速：水平步進
+        const speedY = 2.0; // 降速：前後步進
 
         if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") {
           movePlayerDelta(-speedX, 0);
         } else if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") {
           movePlayerDelta(speedX, 0);
         } else if (e.key === "ArrowUp" || e.key === "w" || e.key === "W") {
-          movePlayerDelta(0, speedY); // 往深處走
+          movePlayerDelta(0, speedY);
         } else if (e.key === "ArrowDown" || e.key === "s" || e.key === "S") {
-          movePlayerDelta(0, -speedY); // 往前走
+          movePlayerDelta(0, -speedY);
         }
       });
     }
 
     function movePlayerDelta(dx, dy) {
       gameState.playerX = Math.max(4, Math.min(94, gameState.playerX + dx));
-      gameState.playerY = Math.max(25, Math.min(85, gameState.playerY + dy)); // 限制在地板走廊範圍
+      gameState.playerY = Math.max(25, Math.min(85, gameState.playerY + dy));
       updatePlayerPos();
       checkAutoProximity();
     }
 
-    // 滑鼠點選走到指定位置
+    // 滑鼠點選走到指定位置（0.95 秒平滑到達）
     function navigateTo(targetX, targetY, onArrived) {
       if (gameState.modalOpen) return;
       gameState.playerX = targetX;
@@ -895,10 +926,10 @@
 
       setTimeout(() => {
         if (onArrived) onArrived();
-      }, 320);
+      }, 980);
     }
 
-    // 點擊場景地面自由行走
+    // 點擊場景地面慢步尋路
     function handleViewportClick(e) {
       if (e.target.closest(".floating-pin") || e.target.closest(".floor-actor") || gameState.modalOpen) return;
       const rect = document.getElementById("roomViewport").getBoundingClientRect();
