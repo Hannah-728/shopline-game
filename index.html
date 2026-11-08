@@ -66,7 +66,7 @@
       font-size: 0.8rem;
     }
 
-    /* 1. 開場 Landing Screen (尺寸不裁切) */
+    /* 1. 開場 Landing Screen */
     #landingScreen {
       position: absolute;
       top: 46px;
@@ -194,7 +194,6 @@
       margin-top: 2px;
     }
 
-    /* 3D 漫步舞台大視窗 */
     .room-viewport {
       flex: 1;
       position: relative;
@@ -217,7 +216,7 @@
       pointer-events: none;
     }
 
-    /* 懸浮發光 Pins (純點擊互動) */
+    /* 懸浮發光 Pins */
     .floating-pin {
       position: absolute;
       transform: translate(-50%, -100%);
@@ -272,7 +271,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.7);
     }
 
-    /* 3D Low Poly 立體小人模型實體 */
+    /* 角色基礎樣式 */
     .floor-actor {
       position: absolute;
       transform: translateX(-50%);
@@ -281,7 +280,23 @@
       align-items: center;
       z-index: 35;
       transition: left 0.95s cubic-bezier(0.25, 0.1, 0.25, 1), bottom 0.95s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    /* 主角不阻擋背後點選 */
+    #playerActor {
       pointer-events: none;
+    }
+
+    /* NPC 開放點擊與 Hover 效果 */
+    #npcActor {
+      cursor: pointer;
+      pointer-events: auto !important;
+      transition: transform 0.2s, filter 0.2s;
+    }
+
+    #npcActor:hover {
+      transform: translateX(-50%) scale(1.05);
+      filter: drop-shadow(0 0 12px var(--cyan-glow));
     }
 
     .actor-figure {
@@ -301,7 +316,7 @@
       box-shadow: 0 3px 8px rgba(0,0,0,0.6);
     }
 
-    /* 底部操作條與手冊槽 (純點選提示) */
+    /* 底部操作條與手冊槽 */
     .stage-footer-bar {
       height: 78px;
       background: #04070c;
@@ -415,7 +430,7 @@
       font-weight: bold;
     }
 
-    /* 3. 沉浸式情境對話與證書彈窗 (不裁切證書) */
+    /* 3. 沉浸式情境對話與證書彈窗 */
     .story-modal-backdrop {
       position: fixed;
       top: 0;
@@ -550,7 +565,7 @@
     <div style="font-size:0.75rem; color:var(--text-sub);">單人空間漫遊・企業願景探索</div>
   </header>
 
-  <!-- 1. 開場 LANDING PAGE (已移除置身3D Low Poly等字眼) -->
+  <!-- 1. 開場 LANDING PAGE -->
   <div id="landingScreen">
     <div class="landing-cover">
       <img src="遊戲開場封面.webp" class="landing-cover-art" alt="SHOPLINE 探索檔案封面">
@@ -588,42 +603,42 @@
         </div>
       </div>
 
-      <!-- 舞台視窗 (點選資源包即可漫步前往) -->
+      <!-- 舞台視窗 -->
       <div class="room-viewport" id="roomViewport" onclick="handleViewportClick(event)">
         
-        <!-- 3 個發光標籤 (點選自動漫步並觸發) -->
-        <div class="floating-pin" id="pinObj1" style="left: 11%; top: 56%;" onclick="navigateTo(11, 45, () => triggerObjectByIndex(1))">
+        <!-- 3 個發光標籤 (點選自動走至物件旁保持適當距離) -->
+        <div class="floating-pin" id="pinObj1" style="left: 11%; top: 56%;" onclick="navigateTo(16, 45, () => triggerObjectByIndex(1))">
           <div class="pin-circle" id="pinCirc1">📍</div>
           <div class="pin-label" id="pinLabel1">迎賓接待台</div>
         </div>
 
-        <div class="floating-pin" id="pinObj2" style="left: 41%; top: 40%;" onclick="navigateTo(41, 50, () => triggerObjectByIndex(2))">
+        <div class="floating-pin" id="pinObj2" style="left: 41%; top: 40%;" onclick="navigateTo(38, 50, () => triggerObjectByIndex(2))">
           <div class="pin-circle" id="pinCirc2">📍</div>
           <div class="pin-label" id="pinLabel2">品牌展示櫥窗</div>
         </div>
 
-        <div class="floating-pin" id="pinObj3" style="left: 68%; top: 58%;" onclick="navigateTo(68, 50, () => triggerObjectByIndex(3))">
+        <div class="floating-pin" id="pinObj3" style="left: 68%; top: 58%;" onclick="navigateTo(64, 50, () => triggerObjectByIndex(3))">
           <div class="pin-circle" id="pinCirc3">📍</div>
           <div class="pin-label" id="pinLabel3">學習資源座席</div>
         </div>
 
-        <!-- NPC 站在右側沙發區 -->
-        <div class="floor-actor" id="npcActor" style="left: 89.5%; bottom: 48px; cursor:pointer;" onclick="navigateTo(87, 48, () => triggerNpcByWalk())">
+        <!-- NPC 站在 89.5%，主角點選時走至 82% 處，避免重疊 -->
+        <div class="floor-actor" id="npcActor" style="left: 89.5%; bottom: 48px;" onclick="navigateTo(82, 48, () => triggerNpcByWalk())">
           <div class="actor-figure" id="npcFigureBox"></div>
           <div class="actor-nametag" id="npcNameBox" style="color:var(--text-gold);">Luke</div>
         </div>
 
-        <!-- 主角小人 (截圖同款多邊形切面陰影微縮造型) -->
+        <!-- 主角小人 -->
         <div class="floor-actor" id="playerActor" style="left: 6%; bottom: 45px;">
           <div class="actor-figure" id="playerFigureBox"></div>
           <div class="actor-nametag" id="playerNameTag" style="color:var(--cyan-shopline);">探索者</div>
         </div>
       </div>
 
-      <!-- 底部操作條與手冊槽 (已刪除WASD/方向鍵文字) -->
+      <!-- 底部操作條與手冊槽 -->
       <div class="stage-footer-bar">
         <div class="keypad-guide">
-          👉 直接點選地圖上的資源包即可探索
+          👉 直接點選地圖上的資源包或同仁即可探索
         </div>
 
         <div style="display:flex; align-items:center; gap:14px;">
@@ -704,37 +719,25 @@
       }
     };
 
-    // 依據截圖真實 3D 多邊形切面陰影還原的三位微縮模型角色
     const LOW_POLY_CHARACTERS = {
-      // 依據截圖：側身邁步、深藍立體切面夾克、俐落白內襯、深色長褲與地面多邊形陰影
       player: `
         <svg viewBox="0 0 70 100" width="100%" height="100%" shape-rendering="geometricPrecision">
           <defs>
             <linearGradient id="pShadow" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgba(0,0,0,0.5)"/><stop offset="100%" stop-color="transparent"/></linearGradient>
           </defs>
-          <!-- 地面漫射接觸陰影 -->
           <polygon points="12,94 48,93 54,97 18,98" fill="url(#pShadow)"/>
-          
-          <!-- 前後邁步的多邊形立體剪裁雙腿 -->
           <polygon points="27,58 35,58 39,89 31,89" fill="#141c26"/>
           <polygon points="31,89 40,89 41,94 30,94" fill="#0d121a"/>
           <polygon points="20,58 28,58 22,91 15,90" fill="#1a2533"/>
           <polygon points="15,90 23,91 21,95 13,94" fill="#0e131b"/>
-
-          <!-- 俐落深藍夾克 (多邊形立體翻領、高光與陰影切面) -->
           <polygon points="17,30 32,30 30,60 17,59" fill="#1a527c"/>
           <polygon points="32,30 46,31 44,60 31,61" fill="#246c9f"/>
-          <!-- 白色內襯切面 -->
           <polygon points="28,30 35,30 33,60 29,60" fill="#ffffff"/>
           <polygon points="29,30 33,30 32,60 30,60" fill="#e2e8f0"/>
-
-          <!-- 手臂與手部多邊形 -->
           <polygon points="13,31 18,30 24,52 19,53" fill="#154467"/>
           <polygon points="19,53 24,52 24,57 20,58" fill="#f5caa1"/>
           <polygon points="46,31 50,33 46,54 42,53" fill="#2b7cb5"/>
           <polygon points="42,53 46,54 45,59 41,58" fill="#f5caa1"/>
-
-          <!-- 側臉微縮五官與多邊形切面短髮 -->
           <polygon points="26,14 40,14 38,29 25,29" fill="#f7cca3"/>
           <polygon points="25,18 28,18 27,26 23,26" fill="#ebb88d"/>
           <polygon points="35,21 38,21 37,23 35,23" fill="#242b35"/>
@@ -743,58 +746,45 @@
           <polygon points="35,12 42,11 39,4" fill="#2c3746"/>
         </svg>
       `,
-      // Luke：藍色連帽衛衣、帽子抽繩切面、插袋休閒姿態
       luke: `
         <svg viewBox="0 0 70 100" width="100%" height="100%" shape-rendering="geometricPrecision">
           <defs>
             <linearGradient id="lShadow" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgba(0,0,0,0.5)"/><stop offset="100%" stop-color="transparent"/></linearGradient>
           </defs>
           <polygon points="14,94 50,93 54,97 18,98" fill="url(#lShadow)"/>
-
           <polygon points="22,58 31,58 27,91 19,91" fill="#1b2533"/>
           <polygon points="31,58 40,58 41,90 33,90" fill="#141c27"/>
           <polygon points="19,91 27,91 26,95 18,95" fill="#0f151e"/>
           <polygon points="33,90 42,90 42,94 33,94" fill="#0b0f15"/>
-
-          <!-- 連帽衛衣 (立體折角切面) -->
           <polygon points="17,30 47,30 44,61 20,61" fill="#256f98"/>
           <polygon points="26,30 38,30 32,41" fill="#00C2FF"/>
           <polygon points="17,30 26,30 23,61 20,61" fill="#1d597b"/>
           <polygon points="38,30 47,30 44,61 41,61" fill="#2f8bbd"/>
-
           <polygon points="13,32 17,31 22,53 18,54" fill="#1b5475"/>
           <polygon points="18,54 22,53 23,58 19,59" fill="#f5caa1"/>
           <polygon points="47,31 51,32 47,53 43,52" fill="#3293c9"/>
           <polygon points="43,52 47,53 46,58 42,57" fill="#f5caa1"/>
-
-          <!-- 臉部與俐落短髮 -->
           <polygon points="26,14 40,14 38,29 25,29" fill="#f7cca3"/>
           <polygon points="33,21 36,21 35,23 33,23" fill="#1f242c"/>
           <polygon points="22,13 42,11 39,4 23,5" fill="#1c2a38"/>
         </svg>
       `,
-      // Una：都會紫紅西裝外套、合身長褲與立體長髮切面
       una: `
         <svg viewBox="0 0 70 100" width="100%" height="100%" shape-rendering="geometricPrecision">
           <defs>
             <linearGradient id="uShadow" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgba(0,0,0,0.5)"/><stop offset="100%" stop-color="transparent"/></linearGradient>
           </defs>
           <polygon points="14,94 48,93 52,97 18,98" fill="url(#uShadow)"/>
-
           <polygon points="22,58 31,58 27,91 19,91" fill="#e0dcce"/>
           <polygon points="31,58 40,58 41,90 33,90" fill="#cec9ba"/>
           <polygon points="19,91 27,91 25,95 18,95" fill="#282522"/>
           <polygon points="33,90 42,90 41,94 33,94" fill="#1e1c19"/>
-
-          <!-- 都會西裝外套 -->
           <polygon points="17,30 47,30 44,61 20,61" fill="#753775"/>
           <polygon points="27,30 37,30 35,61 29,61" fill="#ffffff"/>
           <polygon points="17,30 27,30 24,61 20,61" fill="#612d61"/>
           <polygon points="37,30 47,30 44,61 40,61" fill="#884088"/>
-
           <polygon points="26,14 40,14 38,29 25,29" fill="#fce2c2"/>
           <polygon points="33,21 36,21 35,23 33,23" fill="#2f2520"/>
-          <!-- 微縮多邊形長髮 -->
           <polygon points="21,13 43,11 40,4 22,5" fill="#44230e"/>
           <polygon points="20,13 24,36 27,13" fill="#361a09"/>
           <polygon points="37,13 41,36 44,13" fill="#522b12"/>
@@ -915,12 +905,12 @@
 
     // 點擊場景地面自由漫步
     function handleViewportClick(e) {
-      if (e.target.closest(".floating-pin") || e.target.closest(".floor-actor") || gameState.modalOpen) return;
+      if (e.target.closest(".floating-pin") || e.target.closest("#npcActor") || gameState.modalOpen) return;
       const rect = document.getElementById("roomViewport").getBoundingClientRect();
       const clickX = ((e.clientX - rect.left) / rect.width) * 100;
       const clickY = rect.bottom - e.clientY;
 
-      const clampedX = Math.max(4, Math.min(94, clickX));
+      const clampedX = Math.max(4, Math.min(84, clickX));
       const clampedY = Math.max(25, Math.min(85, clickY));
 
       navigateTo(clampedX, clampedY);
