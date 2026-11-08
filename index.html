@@ -6,9 +6,9 @@
   <title>SHOPLINE 探索檔案：零售生態的日常與未來</title>
   <style>
     :root {
-      --bg-noir: #070b12;
+      --bg-noir: #06090e;
       --panel-dark: rgba(11, 18, 30, 0.96);
-      --border-soft: #1d334e;
+      --border-soft: #1c2e44;
       --gold-bright: #F5CD79;
       --gold-btn: #e5b952;
       --cyan-shopline: #00C2FF;
@@ -66,7 +66,7 @@
       font-size: 0.8rem;
     }
 
-    /* ==================== 1. 開場 LANDING PAGE ==================== */
+    /* 1. 開場 Landing Screen */
     #landingScreen {
       position: absolute;
       top: 46px;
@@ -83,18 +83,17 @@
     }
 
     .landing-cover {
-      flex: 1.1;
-      max-width: 580px;
-      height: 480px;
+      flex: 1.2;
+      max-width: 620px;
+      height: 490px;
       border-radius: 8px;
       border: 1px solid var(--border-soft);
       position: relative;
       overflow: hidden;
-      background: #0a1320;
+      background: #08121f;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 30px;
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.85);
     }
 
@@ -104,13 +103,14 @@
       left: 0;
       width: 100%;
       height: 100%;
+      object-fit: cover;
     }
 
     .landing-cover-meta {
       position: relative;
       z-index: 2;
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
-      padding-top: 20px;
+      background: linear-gradient(180deg, transparent 0%, rgba(4, 7, 12, 0.88) 100%);
+      padding: 24px 30px;
     }
 
     .landing-cover-date {
@@ -118,12 +118,12 @@
       color: var(--gold-bright);
       letter-spacing: 3px;
       font-family: var(--serif-font);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .landing-cover-title {
       font-family: var(--serif-font);
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       color: #fff;
       font-weight: 400;
       line-height: 1.4;
@@ -131,8 +131,8 @@
     }
 
     .landing-content {
-      flex: 1.1;
-      max-width: 520px;
+      flex: 1;
+      max-width: 500px;
     }
 
     .sub-tag {
@@ -144,7 +144,7 @@
 
     .landing-title {
       font-family: var(--serif-font);
-      font-size: 2.3rem;
+      font-size: 2.2rem;
       font-weight: 400;
       color: #ffffff;
       line-height: 1.35;
@@ -183,7 +183,7 @@
       transform: translateY(-2px);
     }
 
-    /* ==================== 2. 主探索空間畫面 ==================== */
+    /* 2. 主探索空間畫面 */
     #gameScreen {
       position: absolute;
       top: 46px;
@@ -238,7 +238,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(180deg, rgba(4, 7, 12, 0.15) 0%, rgba(4, 7, 12, 0) 65%, rgba(4, 7, 12, 0.55) 100%);
+      background: linear-gradient(180deg, rgba(4, 7, 12, 0.1) 0%, rgba(4, 7, 12, 0) 65%, rgba(4, 7, 12, 0.45) 100%);
       pointer-events: none;
     }
 
@@ -297,7 +297,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.7);
     }
 
-    /* 地面走動的人物實體 */
+    /* 地面走動人物 */
     .floor-actor {
       position: absolute;
       bottom: 50px;
@@ -488,7 +488,7 @@
       border: 1px solid var(--border-soft);
       border-radius: 8px;
       width: 100%;
-      max-width: 560px;
+      max-width: 580px;
       box-shadow: 0 15px 50px rgba(0, 0, 0, 0.9);
       overflow: hidden;
       animation: fadeIn 0.2s ease-out;
@@ -501,12 +501,13 @@
 
     .story-card-cover {
       width: 100%;
-      height: 160px;
+      height: 170px;
       background: #05090f;
       border-bottom: 1px solid var(--border-soft);
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
 
     .story-card-body {
@@ -597,10 +598,10 @@
     <div style="font-size:0.75rem; color:var(--text-sub);">單人空間漫遊・企業願景探索</div>
   </header>
 
-  <!-- 1. 開場 LANDING PAGE -->
+  <!-- 1. 開場 LANDING PAGE (綁定 遊戲開場封面.webp) -->
   <div id="landingScreen">
     <div class="landing-cover">
-      <div id="landingCoverBox" class="landing-cover-art"></div>
+      <img src="遊戲開場封面.webp" class="landing-cover-art" alt="SHOPLINE 探索檔案封面">
       <div class="landing-cover-meta">
         <div class="landing-cover-date">2013 — 2026</div>
         <h2 class="landing-cover-title">全通路的旅程，<br>聽見品牌背後的心跳。</h2>
@@ -611,8 +612,8 @@
       <div class="sub-tag">SHOPLINE 入職探索檔案</div>
       <h1 class="landing-title">走進這一天，<br>遇見並肩前行的人。</h1>
       <p style="font-size:0.95rem; line-height:1.85; color:var(--text-sub); margin-bottom:24px;">
-        置身於 3D Low Poly 繪本微縮模型世界中漫步探索。<br>
-        走近大廳接待處、擁有多個合作商家的品牌展示櫥窗，將自動展閱手冊線索。<br>
+        置身於 3D Low Poly 微縮模型大廳中漫步探索。<br>
+        走近迎賓接待處、知名品牌櫥窗與討論區，將自動展閱手冊線索。<br>
         與引導同仁提問交談，逐步破譯團隊的核心使命！
       </p>
 
@@ -639,11 +640,9 @@
         </div>
       </div>
 
-      <!-- 3D 繪本微縮舞台 -->
+      <!-- 3D 繪本微縮舞台 (動態綁定 Shopline場景一.jpg 與 Shopline場景二.webp) -->
       <div class="room-viewport" id="roomViewport">
-        <!-- 第 2 章專用 Low Poly 幾何插畫舞台 (當切換至 Ch2 時啟用) -->
-        <div id="ch2SvgStage" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;"></div>
-
+        
         <!-- 3 個發光標籤 -->
         <div class="floating-pin" id="pinObj1" style="left: 11%; top: 56%;" onclick="triggerObjectByIndex(1)">
           <div class="pin-circle" id="pinCirc1">📍</div>
@@ -737,7 +736,14 @@
   </div>
 
   <script>
-    // 遊戲狀態機
+    // 直接套用你提供的 4 張真實圖檔名稱
+    const GAME_BACKGROUNDS = {
+      cover: "遊戲開場封面.webp",
+      chapter1_lobby: "Shopline場景一.jpg",
+      chapter2_terrace: "Shopline場景二.webp",
+      victory: "認證證書.jpg"
+    };
+
     const gameState = {
       userName: "探索者",
       startTime: null,
@@ -755,46 +761,22 @@
       }
     };
 
-    // 統一 Low Poly 向量美術資產
+    // Low Poly 向量立繪與線索卡片
     const LOW_POLY_ASSETS = {
-      // 封面 3D 微縮大廳浮雕
-      coverSvg: `<svg viewBox="0 0 500 400" width="100%" height="100%" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="cBgGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#111c2b"/><stop offset="100%" stop-color="#080e16"/></linearGradient>
-          <linearGradient id="cFloorGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a3d58"/><stop offset="100%" stop-color="#121b28"/></linearGradient>
-        </defs>
-        <rect width="500" height="400" fill="url(#cBgGrad)"/>
-        <polygon points="0,290 500,290 500,400 0,400" fill="url(#cFloorGrad)"/>
-        <line x1="0" y1="290" x2="500" y2="290" stroke="#375276" stroke-width="2"/>
-        <polygon points="60,80 180,60 180,290 60,290" fill="#18293e" stroke="#253e5e" stroke-width="1.5"/>
-        <polygon points="180,60 380,40 380,290 180,290" fill="#132235" stroke="#253e5e" stroke-width="1.5"/>
-        <polygon points="380,40 460,70 460,290 380,290" fill="#1b2e46" stroke="#253e5e" stroke-width="1.5"/>
-        <!-- 幾何展示櫃與發光 SHOPLINE -->
-        <polygon points="210,130 350,115 350,250 210,250" fill="#0f1b2b" stroke="#00C2FF" stroke-width="2"/>
-        <text x="280" y="195" font-family="'Georgia', serif" font-size="28" font-weight="bold" fill="#00C2FF" text-anchor="middle" letter-spacing="3" opacity="0.9">SHOPLINE</text>
-        <text x="280" y="225" font-family="sans-serif" font-size="10" fill="#8B9BB0" text-anchor="middle" letter-spacing="2">RETAIL PLATFORM</text>
-      </svg>`,
-
-      // 主角：Low Poly 3D 微縮小人 (藍夾克白內搭、幾何面部)
       playerActor: `<svg viewBox="0 0 60 90" width="100%" height="100%">
         <polygon points="14,84 46,84 40,88 20,88" fill="rgba(0,0,0,0.45)"/>
-        <!-- 幾何雙腿 -->
         <polygon points="22,58 29,58 27,84 21,84" fill="#162232"/>
         <polygon points="31,58 38,58 39,84 33,84" fill="#0f1722"/>
-        <!-- 藍色夾克與白內搭 (Low Poly 切面) -->
         <polygon points="17,32 43,32 41,60 19,60" fill="#1d6fa5"/>
         <polygon points="26,32 34,32 33,60 27,60" fill="#ffffff"/>
         <polygon points="17,32 26,32 24,60 19,60" fill="#185680"/>
         <polygon points="34,32 43,32 41,60 36,60" fill="#2582be"/>
-        <!-- 幾何臉部與深色切面短髮 -->
         <polygon points="20,16 40,16 38,32 22,32" fill="#fcdbb0"/>
         <polygon points="26,23 28,23 28,25 26,25" fill="#1a252f"/>
         <polygon points="32,23 34,23 34,25 32,25" fill="#1a252f"/>
         <polygon points="18,16 42,16 38,6 22,6" fill="#1e2b37"/>
         <polygon points="18,16 26,16 22,6" fill="#151e27"/>
       </svg>`,
-
-      // Luke：Low Poly 工程師 (深藍連帽衫)
       lukeActor: `<svg viewBox="0 0 60 90" width="100%" height="100%">
         <polygon points="14,84 46,84 40,88 20,88" fill="rgba(0,0,0,0.45)"/>
         <polygon points="22,58 29,58 27,84 21,84" fill="#1b2a3a"/>
@@ -806,8 +788,6 @@
         <polygon points="32,23 34,23 34,25 32,25" fill="#000"/>
         <polygon points="18,16 42,16 38,6 22,6" fill="#1a5276"/>
       </svg>`,
-
-      // Una：Low Poly 顧問 (紫羅蘭色套裝、微縮長髮)
       unaActor: `<svg viewBox="0 0 60 90" width="100%" height="100%">
         <polygon points="14,84 46,84 40,88 20,88" fill="rgba(0,0,0,0.45)"/>
         <polygon points="22,58 29,58 27,84 21,84" fill="#22313f"/>
@@ -821,41 +801,6 @@
         <polygon points="16,18 20,44 24,18" fill="#4a2300"/>
         <polygon points="44,18 40,44 36,18" fill="#6e3500"/>
       </svg>`,
-
-      // 第 2 章：Low Poly 露台專屬手作幾何大舞台 (替換外部圖片)
-      ch2StageSvg: `<svg viewBox="0 0 900 480" width="100%" height="100%" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="ch2Wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#142135"/><stop offset="100%" stop-color="#0a121e"/></linearGradient>
-          <linearGradient id="ch2Floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#263a54"/><stop offset="100%" stop-color="#0d1624"/></linearGradient>
-        </defs>
-        <!-- 牆壁與地面多邊形透視 -->
-        <rect x="0" y="0" width="900" height="320" fill="url(#ch2Wall)"/>
-        <polygon points="0,320 900,320 900,480 0,480" fill="url(#ch2Floor)"/>
-        <line x1="0" y1="320" x2="900" y2="320" stroke="#34495e" stroke-width="2"/>
-        <line x1="160" y1="320" x2="40" y2="480" stroke="rgba(255,255,255,0.05)" stroke-width="1.5"/>
-        <line x1="420" y1="320" x2="360" y2="480" stroke="rgba(255,255,255,0.05)" stroke-width="1.5"/>
-        <line x1="720" y1="320" x2="780" y2="480" stroke="rgba(255,255,255,0.05)" stroke-width="1.5"/>
-
-        <!-- 物件 4：Low Poly 霓虹光牆 (左側) -->
-        <polygon points="80,120 250,110 250,230 80,240" fill="#0c1626" stroke="#00C2FF" stroke-width="2"/>
-        <text x="165" y="175" font-family="'Noto Serif TC', serif" font-size="13" font-weight="bold" fill="#00C2FF" text-anchor="middle" letter-spacing="1">店家的成功</text>
-        <text x="165" y="200" font-family="'Noto Serif TC', serif" font-size="12" fill="#F5CD79" text-anchor="middle">才是我們的成功</text>
-
-        <!-- 物件 5：Low Poly 幾何地球儀 (中央) -->
-        <polygon points="415,245 465,245 455,305 425,305" fill="#1b2b40" stroke="#30496a" stroke-width="1.5"/>
-        <polygon points="440,150 475,170 475,215 440,235 405,215 405,170" fill="#16283f" stroke="#F5CD79" stroke-width="2"/>
-        <polygon points="420,180 445,170 455,195 430,205" fill="#00E599"/>
-        <circle cx="440" cy="192" r="4" fill="#00C2FF"/>
-
-        <!-- 物件 6：Low Poly AI 轉型白板 (右側) -->
-        <polygon points="630,120 780,110 780,240 630,250" fill="#EBF2FA" stroke="#2c3e50" stroke-width="2.5"/>
-        <polygon points="650,145 680,140 680,175 650,180" fill="#F5CD79"/>
-        <polygon points="695,145 725,140 725,175 695,180" fill="#00C2FF"/>
-        <polygon points="740,145 770,140 770,175 740,180" fill="#FF7B72"/>
-        <line x1="655" y1="210" x2="755" y2="200" stroke="#34495e" stroke-width="2"/>
-      </svg>`,
-
-      // 特寫卡片統一 Low Poly 風格
       counterArt: `<svg viewBox="0 0 300 120" width="100%" height="100%"><rect width="300" height="120" fill="#08101a"/><polygon points="25,40 275,35 275,95 25,100" fill="#111f32" stroke="#00C2FF" stroke-width="2"/><polygon points="115,20 185,15 185,55 115,60" fill="#ffffff"/><text x="150" y="42" font-family="'Georgia', serif" font-size="12" fill="#00C2FF" text-anchor="middle" font-weight="bold">700,000+</text></svg>`,
       showcaseArt: `<svg viewBox="0 0 300 120" width="100%" height="100%"><rect width="300" height="120" fill="#08101a"/><polygon points="35,15 265,15 265,105 35,105" fill="#132033" stroke="#F5CD79" stroke-width="2"/><circle cx="85" cy="48" r="16" fill="#FF7B72"/><polygon points="135,28 165,28 165,65 135,65" fill="#00E599"/><polygon points="185,32 220,32 220,62 185,62" fill="#00C2FF"/><text x="150" y="90" font-family="sans-serif" font-size="10" fill="#E2ECF7" text-anchor="middle">好好生醫、青鳥旅行、綠藤生機等生活夥伴 🛍️</text></svg>`,
       booksArt: `<svg viewBox="0 0 300 120" width="100%" height="100%"><rect width="300" height="120" fill="#08101a"/><polygon points="45,15 255,15 255,105 45,105" fill="#152438" stroke="#1d3b5e" stroke-width="2"/><polygon points="70,35 90,35 90,95 70,95" fill="#00C2FF"/><polygon points="95,45 115,45 115,95 95,95" fill="#F5CD79"/><polygon points="120,30 145,30 145,95 120,95" fill="#00E599"/></svg>`,
@@ -874,7 +819,6 @@
     };
 
     window.onload = function() {
-      document.getElementById("landingCoverBox").innerHTML = LOW_POLY_ASSETS.coverSvg;
       document.getElementById("playerFigureBox").innerHTML = LOW_POLY_ASSETS.playerActor;
     };
 
@@ -902,12 +846,10 @@
       updatePlayerPos();
 
       const viewport = document.getElementById("roomViewport");
-      const ch2Stage = document.getElementById("ch2SvgStage");
 
       if (ch === 1) {
-        // 第 1 章：使用剛定案的 image_26.png (大廳與專屬品牌牆)
-        viewport.style.backgroundImage = "url('image_26.png')";
-        ch2Stage.style.display = "none";
+        // 套入 Shopline場景一.jpg
+        viewport.style.backgroundImage = `url('${GAME_BACKGROUNDS.chapter1_lobby}')`;
 
         document.getElementById("chapterSubHeader").innerText = "CHAPTER 01 / 2013 - NOW";
         document.getElementById("chapterMainHeader").innerText = "新手報到！走進 SHOPLINE 零售世界";
@@ -921,10 +863,8 @@
         setPinPos("pinObj2", 41, 40, "品牌展示櫥窗", gameState.inventory.item2);
         setPinPos("pinObj3", 68, 58, "學習資源座席", gameState.inventory.item3);
       } else {
-        // 第 2 章：使用統一 Low Poly 向量繪製的露台空間
-        viewport.style.backgroundImage = "none";
-        ch2Stage.style.display = "block";
-        ch2Stage.innerHTML = LOW_POLY_ASSETS.ch2StageSvg;
+        // 套入 Shopline場景二.webp
+        viewport.style.backgroundImage = `url('${GAME_BACKGROUNDS.chapter2_terrace}')`;
 
         document.getElementById("chapterSubHeader").innerText = "CHAPTER 02 / CULTURE & FUTURE";
         document.getElementById("chapterMainHeader").innerText = "協作前行！文化使命與未來藍圖";
@@ -937,9 +877,10 @@
         document.getElementById("timeRow1").classList.remove("active");
         document.getElementById("timeRow2").classList.add("active");
 
-        setPinPos("pinObj1", 18, 48, "文化霓虹光牆", gameState.inventory.item4);
-        setPinPos("pinObj2", 49, 44, "全球地圖儀", gameState.inventory.item5);
-        setPinPos("pinObj3", 78, 48, "AI 轉型白板", gameState.inventory.item6);
+        // 鎖定 Shopline場景二 的發光標籤位置
+        setPinPos("pinObj1", 12, 54, "文化霓虹光牆", gameState.inventory.item4);
+        setPinPos("pinObj2", 48, 48, "全球地圖儀", gameState.inventory.item5);
+        setPinPos("pinObj3", 75, 52, "AI 轉型白板", gameState.inventory.item6);
       }
 
       updateTray();
@@ -1017,21 +958,21 @@
           return;
         }
       } else {
-        if (Math.abs(x - 18) <= 3) {
+        if (Math.abs(x - 12) <= 3) {
           if (gameState.lastTriggered !== "obj4") {
             gameState.lastTriggered = "obj4";
             triggerObjectByIndex(1);
           }
           return;
         }
-        if (Math.abs(x - 49) <= 3.5) {
+        if (Math.abs(x - 48) <= 3.5) {
           if (gameState.lastTriggered !== "obj5") {
             gameState.lastTriggered = "obj5";
             triggerObjectByIndex(2);
           }
           return;
         }
-        if (Math.abs(x - 78) <= 3) {
+        if (Math.abs(x - 75) <= 3) {
           if (gameState.lastTriggered !== "obj6") {
             gameState.lastTriggered = "obj6";
             triggerObjectByIndex(3);
@@ -1261,11 +1202,10 @@
       }
     }
 
-    // ==================== 3. 結尾：統一風格認證結算 ====================
+    // 結尾：套入 認證證書.jpg
     function showFinalVictory() {
       const duration = Math.floor((new Date() - gameState.startTime) / 1000);
 
-      // 回傳 Google 試算表
       sendDataToGAS({
         userName: gameState.userName,
         status: "完成",
@@ -1276,13 +1216,6 @@
 
       const bodyHtml = `
         <div style="text-align:center; padding: 6px 0;">
-          <!-- 3 位 Low Poly 夥伴同框徽章 -->
-          <div style="display:flex; justify-content:center; align-items:center; gap:16px; margin-bottom:14px;">
-            <div style="width:48px; height:68px;">${LOW_POLY_ASSETS.lukeActor}</div>
-            <div style="width:58px; height:82px; border:2px solid var(--gold-bright); border-radius:8px; padding:3px; background:#0f1d30; box-shadow:0 0 15px rgba(245,205,121,0.5);">${LOW_POLY_ASSETS.playerActor}</div>
-            <div style="width:48px; height:68px;">${LOW_POLY_ASSETS.unaActor}</div>
-          </div>
-
           <div style="font-family:var(--serif-font); font-size:1.18rem; color:var(--gold-bright); font-weight:bold; margin-bottom:10px;">🏆 SHOPLINE 零售探索領航員認證</div>
           
           <div style="background:#08121e; border:1px solid #1a304e; padding:14px; border-radius:6px; font-size:0.9rem; line-height:1.8; text-align:left; color:#f0f6fc; margin-bottom:14px;">
@@ -1299,7 +1232,7 @@
         </div>
       `;
 
-      showDialog(LOW_POLY_ASSETS.counterArt, "入職檔案結案", "通關認證達成", bodyHtml, `
+      showDialog(`<img src="${GAME_BACKGROUNDS.victory}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='Shopline場景一.jpg'">`, "入職檔案結案", "通關認證達成", bodyHtml, `
         <button class="gold-action-btn" style="width:100%; justify-content:center;" onclick="location.reload()">重新探索 ➔</button>
       `);
     }
